@@ -2,7 +2,8 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Common from '../components/common';
-import Dashboard from '../components/menu/dashboard';
+import MainNavigation from '../components/menu/main-navigation';
+import AccountStatus from '../components/menu/account-status';
 
 // Define props type for the component
 type MyActionProps = {
@@ -12,8 +13,9 @@ type MyActionProps = {
 // Main Index component that renders the Common component with API data
 export default function Index({ apiData } : MyActionProps) {
   return (
-    <Common apiData={apiData} path="/dashboard">
-      <Dashboard data={apiData}/>
+    <Common apiData={apiData} path="/account-status">
+      <MainNavigation path="/account-status"/>
+      <AccountStatus data={apiData}/>
     </Common>
   );
 }

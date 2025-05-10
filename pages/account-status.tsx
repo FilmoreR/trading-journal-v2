@@ -15,7 +15,7 @@ type MyActionProps = {
 export default function Index({ apiData } : MyActionProps) {
   return (
     <Common apiData={apiData} path="/account-status">
-      <MainNavigation path="/dashboard"/>
+      <MainNavigation path="/account-status"/>
       <PageLoader>
         <AccountStatus data={apiData}/>
       </PageLoader>

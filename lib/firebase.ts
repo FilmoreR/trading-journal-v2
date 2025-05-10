@@ -12,6 +12,7 @@ const firebaseConfig = {
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,  // Storage bucket for Firebase Storage
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,  // Sender ID for Firebase Cloud Messaging
   appId: process.env.FIREBASE_APP_ID,             // Unique identifier for the Firebase app
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,             // Unique identifier for the Firebase app
 };
 
 // Initialize Firebase app if it doesn't exist, otherwise get the existing app

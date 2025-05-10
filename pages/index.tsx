@@ -43,12 +43,57 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Parse the JSON response
   const firebaseData = await firebaseDatabase.json();
+<<<<<<< HEAD
+=======
+  const locations = firebaseData.traveLocations;
+
+  // Initialize array to store processed location data
+  let newArray: any[] = [];
+
+  // Process each location
+  locations.forEach(function(data : any) {
+    // Initialize arrays for media content
+    let images: any[] = [];
+    let videos: any[] = [];
+
+    // Process images if they exist
+    data?.images?.forEach(function(image : any) {
+      images.push(image)
+    })
+
+    // Process videos if they exist
+    data?.videos?.forEach(function(video : any) {
+      videos.push(video)
+    })
+
+    // Create a new object with processed data
+    const newObject = {
+      iconUrl : `${fullUrl}${data.iconUrl}`, // Construct full URL for icon
+      lat : data.lat,                        // Latitude
+      lng : data.lng,                        // Longitude
+      title : data.title,                    // Location title
+      images : images,                       // Processed images array
+      videos : videos                        // Processed videos array
+    }
+    
+    // Add processed location to the array
+    newArray.push(newObject);
+  })
+  
+  // Return empty props if no locations found
+  if (!locations) {
+    return {
+      props: {}
+    };
+  }
+>>>>>>> parent of e551fd9 (seting up for my firebase real time dastabase for trading journal)
 
   // Return processed data as props
   return {
     props: {
       apiData: {
-        firebaseData: firebaseData
+        firebaseData: firebaseData,
+        tavelLocations : (newArray && newArray ) // Note: Possible typo in 'tavelLocations'
       }
     }
   };

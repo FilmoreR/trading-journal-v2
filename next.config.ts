@@ -21,12 +21,16 @@ const nextConfig: NextConfig = {
     FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
+<<<<<<< HEAD
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
     FIREBASE_DB_REFERENCE: process.env.FIREBASE_DB_REFERENCE,
     
     LOGIN_USER_EMAIL_ADDRESS: process.env.LOGIN_USER_EMAIL_ADDRESS,
     LOGIN_USER_PASSWORD: process.env.LOGIN_USER_PASSWORD
+=======
+    FIREBASE_APP_ID: process.env.FIREBASE_APP_ID
+>>>>>>> parent of e551fd9 (seting up for my firebase real time dastabase for trading journal)
   },
 };
 

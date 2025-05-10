@@ -10,7 +10,7 @@ import { ref, get } from 'firebase/database';
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Create a reference to the database path
-  const dbRef = ref(database, process.env.FIREBASE_DB_REFERENCE); // replace with your real path
+  const dbRef = ref(database, 'myDatabase'); // replace with your real path
 
   try {
     // Attempt to fetch data from Firebase

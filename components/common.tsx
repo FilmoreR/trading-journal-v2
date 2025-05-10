@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Geist, Geist_Mono } from "next/font/google";
 import Login from './login';
+import { useRouter } from 'next/router';
 
 // Initialize Geist Sans font with Latin subset
 const geistSans = Geist({
@@ -21,12 +22,15 @@ const geistMono = Geist_Mono({
  */
 export default function Common({
     apiData,
-    children
+    children,
+    path
   }: {
     apiData: any;
-    children: React.ReactNode
+    children: React.ReactNode,
+    path: string
   }) {
 
+    const router = useRouter();
     const [pageload, setPageLoad] = useState(false);
     const [loginUser, setLoginUser] = useState(false);
 
@@ -37,6 +41,7 @@ export default function Common({
         
         if (isUserLogin) {
           try {
+            router.push(path === '/index'? '/dashboard': path);
             setLoginUser(true);
           } catch (error) {
              setLoginUser(false);
@@ -52,7 +57,13 @@ export default function Common({
         <div className={geistSans.className}>
            {pageload ? (
             <div>
-              {!loginUser ? (<Login setLoginUser={setLoginUser}/>) : children}
+              {!loginUser ? (<Login setLoginUser={setLoginUser} path={path === '/index'? '/dashboard': path}/>) : 
+                (
+                  <div> 
+                    {path === '/index'? '': children}
+                  </div>
+                )
+              }
             </div>
            ) : ''}
         </div>

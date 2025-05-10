@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import useApi from '../../hooks/use-api';
+import { useRouter } from 'next/router';
 
 /**
  * Props interface for GalleryInformation component
  */
 type LoginProps = {
     setLoginUser: (status: boolean) => void;  // Function to update modal status
+    path: string;
 };
 
 const Login = ({
-    setLoginUser
+    setLoginUser,
+    path
 }: LoginProps) => {
-
+     const router = useRouter();
     const { authentication} = useApi();
 
     const [formData, setFormData] = useState({
@@ -36,6 +39,7 @@ const Login = ({
         .then(async (res) => {
             if(res.status){
                 sessionStorage.setItem('token', res.user.token);
+                router.push(path);
                 setLoginStatus("successful");
                 setLoginUser(true)
             } else {

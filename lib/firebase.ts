@@ -2,6 +2,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 // Import Firebase Realtime Database function
 import { getDatabase } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 
 // Firebase configuration object using environment variables
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase app if it doesn't exist, otherwise get the existing app
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
 // Export initialized Firebase Realtime Database instance
 export const database = getDatabase(app);

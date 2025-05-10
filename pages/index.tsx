@@ -2,6 +2,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Common from '../components/common';
+import Dashboard from '../components/dashboard';
 
 // Define props type for the component
 type MyActionProps = {
@@ -10,7 +11,11 @@ type MyActionProps = {
 
 // Main Index component that renders the Common component with API data
 export default function Index({ apiData } : MyActionProps) {
-  return <Common apiData={apiData} />;
+  return (
+    <Common apiData={apiData} >
+      <Dashboard data={apiData}/>
+    </Common>
+  );
 }
 
 // Server-side props function to fetch and prepare data
@@ -38,9 +43,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Parse the JSON response
   const firebaseData = await firebaseDatabase.json();
-  console.log("firebaseData ------>", firebaseData)
-  // const locations = firebaseData.traveLocations;
-
 
   // Return processed data as props
   return {

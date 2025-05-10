@@ -1,6 +1,7 @@
 // Import necessary React hooks and components
 import { useState, useEffect } from 'react';
 import { Geist, Geist_Mono } from "next/font/google";
+import Login from './login';
 
 // Initialize Geist Sans font with Latin subset
 const geistSans = Geist({
@@ -19,30 +20,41 @@ const geistMono = Geist_Mono({
  * @param {Object} apiData - Data received from API containing travel locations
  */
 export default function Common({
-    apiData
+    apiData,
+    children
   }: {
     apiData: any;
+    children: React.ReactNode
   }) {
-    // console.log("apiData", JSON.stringify(apiData))
 
-    // State to store travel location data
-    const [getTravelLocation, setGetTravelLocation] = useState(false);
+    const [pageload, setPageLoad] = useState(false);
+    const [loginUser, setLoginUser] = useState(false);
+
 
     // Effect to update travel location state when apiData changes
     useEffect(() => {
-        console.log("useEffect apiData", apiData.tavelLocations)
-
-        // Set travel locations if they exist in apiData
-        if(apiData.tavelLocations) {
-            setGetTravelLocation(apiData.tavelLocations)
+        const isUserLogin = sessionStorage.getItem("token");
+        
+        if (isUserLogin) {
+          try {
+            setLoginUser(true);
+          } catch (error) {
+             setLoginUser(false);
+            console.error("Failed to parse session data:", error);
+          }
         }
-
+        
+        setPageLoad(true);
     },[]);
 
     // Render GoogleMap component if travel locations exist
     return (
         <div className={geistSans.className}>
-           TEST TEST
+           {pageload ? (
+            <div>
+              {!loginUser ? (<Login setLoginUser={setLoginUser}/>) : children}
+            </div>
+           ) : ''}
         </div>
     )
 }

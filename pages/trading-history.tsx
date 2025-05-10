@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 import Common from '../components/common';
 import MainNavigation from '../components/menu/main-navigation';
 import TradingHistory from '../components/menu/trading-history';
+import PageLoader from '../components/templates/page-loader';
 
 // Define props type for the component
 type MyActionProps = {
@@ -14,8 +15,10 @@ type MyActionProps = {
 export default function Index({ apiData } : MyActionProps) {
   return (
     <Common apiData={apiData} path="/trading-history">
-      <MainNavigation path="/trading-history"/>
-      <TradingHistory data={apiData}/>
+      <MainNavigation path="/dashboard"/>
+      <PageLoader>
+        <TradingHistory data={apiData}/>
+      </PageLoader>
     </Common>
   );
 }

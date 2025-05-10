@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import classNames from 'classnames';
 
 /**
  * Props interface for GalleryInformation component

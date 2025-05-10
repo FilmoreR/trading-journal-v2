@@ -41,7 +41,7 @@ export default function Common({
         
         if (isUserLogin) {
           try {
-            router.push(path);
+            router.push(path === '/index'? '/dashboard': path);
             setLoginUser(true);
           } catch (error) {
              setLoginUser(false);
@@ -57,7 +57,13 @@ export default function Common({
         <div className={geistSans.className}>
            {pageload ? (
             <div>
-              {!loginUser ? (<Login setLoginUser={setLoginUser} path={path}/>) : children}
+              {!loginUser ? (<Login setLoginUser={setLoginUser} path={path === '/index'? '/dashboard': path}/>) : 
+                (
+                  <div> 
+                    {path === '/index'? '': children}
+                  </div>
+                )
+              }
             </div>
            ) : ''}
         </div>

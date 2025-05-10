@@ -2,6 +2,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Common from '../components/common';
+import Dashboard from '../components/dashboard';
 
 // Define props type for the component
 type MyActionProps = {
@@ -10,7 +11,11 @@ type MyActionProps = {
 
 // Main Index component that renders the Common component with API data
 export default function Index({ apiData } : MyActionProps) {
-  return <Common apiData={apiData} />;
+  return (
+    <Common apiData={apiData} >
+      <Dashboard data={apiData}/>
+    </Common>
+  );
 }
 
 // Server-side props function to fetch and prepare data
@@ -38,54 +43,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Parse the JSON response
   const firebaseData = await firebaseDatabase.json();
-  const locations = firebaseData.traveLocations;
-
-  // Initialize array to store processed location data
-  let newArray: any[] = [];
-
-  // Process each location
-  locations.forEach(function(data : any) {
-    // Initialize arrays for media content
-    let images: any[] = [];
-    let videos: any[] = [];
-
-    // Process images if they exist
-    data?.images?.forEach(function(image : any) {
-      images.push(image)
-    })
-
-    // Process videos if they exist
-    data?.videos?.forEach(function(video : any) {
-      videos.push(video)
-    })
-
-    // Create a new object with processed data
-    const newObject = {
-      iconUrl : `${fullUrl}${data.iconUrl}`, // Construct full URL for icon
-      lat : data.lat,                        // Latitude
-      lng : data.lng,                        // Longitude
-      title : data.title,                    // Location title
-      images : images,                       // Processed images array
-      videos : videos                        // Processed videos array
-    }
-    
-    // Add processed location to the array
-    newArray.push(newObject);
-  })
-  
-  // Return empty props if no locations found
-  if (!locations) {
-    return {
-      props: {}
-    };
-  }
 
   // Return processed data as props
   return {
     props: {
       apiData: {
-        firebaseData: firebaseData,
-        tavelLocations : (newArray && newArray ) // Note: Possible typo in 'tavelLocations'
+        firebaseData: firebaseData
       }
     }
   };

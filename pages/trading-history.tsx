@@ -1,7 +1,7 @@
 // Import required dependencies
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Common from '../components/common';
+import Authentication from '../components/Authentication';
 import MainNavigation from '../components/menu/main-navigation';
 import TradingHistory from '../components/menu/trading-history';
 import PageLoader from '../components/templates/page-loader';
@@ -14,12 +14,12 @@ type MyActionProps = {
 // Main Index component that renders the Common component with API data
 export default function Index({ apiData } : MyActionProps) {
   return (
-    <Common apiData={apiData} path="/trading-history">
+    <Authentication apiData={apiData} path="/trading-history">
       <MainNavigation path="/trading-history"/>
       <PageLoader>
         <TradingHistory data={apiData}/>
       </PageLoader>
-    </Common>
+    </Authentication>
   );
 }
 

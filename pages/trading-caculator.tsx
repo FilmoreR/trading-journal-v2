@@ -1,7 +1,7 @@
 // Import required dependencies
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Common from '../components/common';
+import Authentication from '../components/Authentication';
 import MainNavigation from '../components/menu/main-navigation';
 import TradingCalculator from '../components/menu/trading-caculator';
 import PageLoader from '../components/templates/page-loader';
@@ -15,12 +15,12 @@ type MyActionProps = {
 // Main Index component that renders the Common component with API data
 export default function Index({ apiData } : MyActionProps) {
   return (
-    <Common apiData={apiData} path="/trading-caculator">
+    <Authentication apiData={apiData} path="/trading-caculator">
       <MainNavigation path="/trading-caculator"/>
       <PageLoader>
         <TradingCalculator data={apiData}/>
       </PageLoader>
-    </Common>
+    </Authentication>
   );
 }
 

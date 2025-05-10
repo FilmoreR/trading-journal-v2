@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
  * Common component that handles travel location data and renders GoogleMap
  * @param {Object} apiData - Data received from API containing travel locations
  */
-export default function Common({
+export default function Authentication({
     apiData,
     children,
     path

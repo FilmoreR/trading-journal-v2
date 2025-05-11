@@ -1,0 +1,20 @@
+.trade {
+    &__order__execution {
+        .descrption,
+        .value {
+            white-space: normal;
+        }
+
+        .value {
+            text-align: right;
+        }
+
+        table {
+            tbody {
+                .table_head {
+                    width: 70%;
+                }
+            }
+        }
+    }
+}

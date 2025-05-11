@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import classNames from 'classnames';
+import TradeOrderExecution from './trade-order-execution';
+import TradeBuy from './trade-type/trade-buy';
+import TradeShort from './trade-type/trade-short';
 
 /**
  * Props interface for GalleryInformation component
@@ -18,14 +20,15 @@ const TradingCalculator = ({
     },[]);
 
     return (
-        <div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
-                <div>
-                    <p className="text-xl">Trading Calculator...</p>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </p>
-                </div>
+                <TradeOrderExecution data={data} />
+            </div>
+            <div>
+                <TradeBuy data={data} />
+            </div>
+            <div>
+                <TradeShort data={data} />
             </div>
         </div>
     );

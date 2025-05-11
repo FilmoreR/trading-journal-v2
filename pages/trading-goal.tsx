@@ -5,6 +5,7 @@ import Authentication from '../components/Authentication';
 import MainNavigation from '../components/menu/main-navigation';
 import TradingGoal from '../components/menu/trading-goal';
 import PageLoader from '../components/templates/page-loader';
+import Card from '../components/templates/card';
 
 // Define props type for the component
 type MyActionProps = {
@@ -17,7 +18,9 @@ export default function Index({ apiData } : MyActionProps) {
     <Authentication apiData={apiData} path="/trading-goal">
       <MainNavigation path="/trading-goal"/>
       <PageLoader>
-        <TradingGoal data={apiData}/>
+        <Card>
+          <TradingGoal data={apiData}/>
+        </Card>
       </PageLoader>
     </Authentication>
   );

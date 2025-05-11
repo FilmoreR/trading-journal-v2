@@ -5,6 +5,7 @@ import Authentication from '../components/Authentication';
 import Dashboard from '../components/menu/dashboard';
 import MainNavigation from '../components/menu/main-navigation';
 import PageLoader from '../components/templates/page-loader';
+import Card from '../components/templates/card';
 
 // Define props type for the component
 type MyActionProps = {
@@ -17,7 +18,9 @@ export default function Index({ apiData } : MyActionProps) {
     <Authentication apiData={apiData} path="/dashboard">
       <MainNavigation path="/dashboard"/>
       <PageLoader>
-        <Dashboard data={apiData}/>
+        <Card>
+          <Dashboard data={apiData}/>
+        </Card>
       </PageLoader>
     </Authentication>
   );

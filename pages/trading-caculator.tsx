@@ -5,6 +5,7 @@ import Authentication from '../components/Authentication';
 import MainNavigation from '../components/menu/main-navigation';
 import TradingCalculator from '../components/menu/trading-caculator';
 import PageLoader from '../components/templates/page-loader';
+import Card from '../components/templates/card';
 
 
 // Define props type for the component
@@ -18,7 +19,9 @@ export default function Index({ apiData } : MyActionProps) {
     <Authentication apiData={apiData} path="/trading-caculator">
       <MainNavigation path="/trading-caculator"/>
       <PageLoader>
-        <TradingCalculator data={apiData}/>
+        <Card>
+          <TradingCalculator data={apiData}/>
+        </Card>
       </PageLoader>
     </Authentication>
   );

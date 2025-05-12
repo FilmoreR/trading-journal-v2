@@ -16,7 +16,7 @@ const TradingCalculator = ({
 
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        console.log("TradingCalculator ---->:data", data)
     },[]);
 
     return (

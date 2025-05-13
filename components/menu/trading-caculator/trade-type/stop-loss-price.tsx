@@ -6,13 +6,11 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type StopLossPriceProps = {
-    data : any;
     value : string;
     formulaDescription : string;
 };
 
-const StopLossPrice = ({ 
-    data,
+const StopLossPrice = ({
     value,
     formulaDescription
 }: StopLossPriceProps) => {

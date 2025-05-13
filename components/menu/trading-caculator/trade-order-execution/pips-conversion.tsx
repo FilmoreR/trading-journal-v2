@@ -12,10 +12,12 @@ type PipsConversionProps = {
 const PipsConversion = ({ 
     data
 }: PipsConversionProps) => {
+    
+    const [pipsConversion, setPipsConversion] = useState<any>('');
 
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setPipsConversion(data._getTradeOrderComputationData.pipsConversion);
     },[]);
 
     return (
@@ -24,7 +26,7 @@ const PipsConversion = ({
                 <div className={classNames(styles.descrption)}>Pips Conversion</div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>0.0001</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{pipsConversion}</div>
             </td>
         </tr>
     );

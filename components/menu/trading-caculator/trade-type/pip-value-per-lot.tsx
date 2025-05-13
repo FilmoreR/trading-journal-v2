@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type PipValuePerLotProps = {
-    data : any;
     value : string;
 };
 
-const PipValuePerLot = ({ 
-    data,
+const PipValuePerLot = ({
     value
 }: PipValuePerLotProps) => {
 

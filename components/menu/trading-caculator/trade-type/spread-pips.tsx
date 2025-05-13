@@ -6,17 +6,22 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type SpreadPipsProps = {
-    data : any;
+    value : any;
 };
 
 const SpreadPips = ({ 
-    data
+    value
 }: SpreadPipsProps) => {
 
+    const [spreadPips, setSpreadPips] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setSpreadPips(value);
     },[]);
+
+    const handleChange = (e: any) => {
+        setSpreadPips(e.target.value);
+    };
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -24,7 +29,13 @@ const SpreadPips = ({
                 <div className={classNames(styles.descrption)}>Spread (pips)</div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <input type="text" id="standard-lot" className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" placeholder="6" value={'1.8'}/>
+                <input 
+                    type="text" 
+                    id="standard-lot" 
+                    className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
+                    placeholder={spreadPips}
+                    value={spreadPips}
+                    onChange={handleChange}/>
             </td>
         </tr>
     );

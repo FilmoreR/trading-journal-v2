@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type SLMaximumLossProps = {
-    data : any;
     value : string;
 };
 
 const SLMaximumLoss = ({ 
-    data,
     value
 }: SLMaximumLossProps) => {
 

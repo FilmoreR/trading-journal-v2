@@ -6,13 +6,11 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type StopLossPipsProps = {
-    data : any;
     value : string;
     formulaDescription : string;
 };
 
 const StopLossPips = ({ 
-    data,
     value,
     formulaDescription
 }: StopLossPipsProps) => {

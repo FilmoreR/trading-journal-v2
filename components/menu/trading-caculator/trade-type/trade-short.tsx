@@ -30,10 +30,45 @@ type TradeShortProps = {
 const TradeShort = ({ 
     data
 }: TradeShortProps) => {
+    const [shortStopLossPrice, setShortStopLossPrice] = useState<any>('');
+    const [shortStopLossPips, setShortStopLossPips] = useState<any>('');
+
+    const [shortPipValuePerLot, setShortPipValuePerLot] = useState<any>('');
+    const [shortExpectedVolume, setShortExpectedVolume] = useState<any>('');
+
+    const [shortTakeProfitPips, setShortTakeProfitPips] = useState<any>('');
+    const [shortTakeProfitPrice, setShortTakeProfitPrice] = useState<any>('');
+
+    const [shortSLMaximumLoss, setShortSLMaximumLoss] = useState<any>('');
+    const [shortSLMaximumLossPercentage, setShortSLMaximumLossPercentage] = useState<any>('');
+
+    const [shortTPMaximumProfit, setShortTPMaximumProfit] = useState<any>('');
+    const [shortTPMaximumProfitPercentage, setShortTPMaximumProfitPerentage] = useState<any>('');
+
+    const [shortSpreadPips, setShortSpreadPips] = useState<any>('');
+    const [shortSpreadCost, setShortSpreadCost] = useState<any>('');
+    const [shortTotalPotentialLoss, setShortTotalPotentialLoss] = useState<any>('');
 
     // Effect hook for any future initialization needs
     useEffect(() => {
+        setShortStopLossPrice(data._getTradeOrderComputationData.shortStopLossPrice);
+        setShortStopLossPips(data._getTradeOrderComputationData.shortStopLossPips);
 
+        setShortPipValuePerLot(data._getTradeOrderComputationData.shortPipValuePerLot);
+        setShortExpectedVolume(data._getTradeOrderComputationData.shortExpectedVolume);
+
+        setShortTakeProfitPips(data._getTradeOrderComputationData.shortTakeProfitPips);
+        setShortTakeProfitPrice(data._getTradeOrderComputationData.shortTakeProfitPrice);
+
+        setShortSLMaximumLoss(data._getTradeOrderComputationData.shortSLMaximumLoss);
+        setShortSLMaximumLossPercentage(data._getTradeOrderComputationData.shortSLMaximumLossPercentage);
+
+        setShortTPMaximumProfit(data._getTradeOrderComputationData.shortTPMaximumProfit);
+        setShortTPMaximumProfitPerentage(data._getTradeOrderComputationData.shortTPMaximumProfitPercentage);
+
+        setShortSpreadPips(data._getTradeOrderComputationData.shortSpreadPips);
+        setShortSpreadCost(data._getTradeOrderComputationData.shortSpreadCost);
+        setShortTotalPotentialLoss(data._getTradeOrderComputationData.shortTotalPotentialLoss);
     },[]);
 
     return (
@@ -41,41 +76,61 @@ const TradeShort = ({
             <h5 className="text-xl font-bold dark:text-white text-red-700">SELL / SHORT</h5>
             <br />
             <TableTbodyTemplate>
-                <StopLossPrice 
-                    data={data}
-                    value={'1.33606'}
-                    formulaDescription={'(Entry Price + (Entry Price * Stop Loss level %)'} />
+                {shortStopLossPrice? (
+                    <StopLossPrice 
+                        value={shortStopLossPrice.toFixed(5)}
+                        formulaDescription={'(Entry Price + (Entry Price * Stop Loss level %)'} />
+                ) : ''}
 
-                <StopLossPips 
-                    data={data}
-                    value={'132.283'}
-                    formulaDescription={'(( Stop Loss Price - Entry Price) / Pips Conversion)'} />
+                {shortStopLossPips? (
+                    <StopLossPips 
+                        value={shortStopLossPips.toFixed(3)}
+                        formulaDescription={'(( Stop Loss Price - Entry Price) / Pips Conversion)'} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <PipValuePerLot data={data} value={'$7.56'} />
+                {shortPipValuePerLot? (
+                    <PipValuePerLot value={`$${shortPipValuePerLot.toFixed(2)}`} />
+                ) : ''}
 
-                <ExpectedVolume data={data} value={'0.01'} />
+                {shortExpectedVolume? (
+                    <ExpectedVolume value={shortExpectedVolume.toFixed(2)} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <TakeProfitPips data={data} value={'793.69'} />
+                {shortTakeProfitPips? (
+                    <TakeProfitPips value={shortTakeProfitPips.toFixed(2)} />
+                ) : ''}
 
-                <TakeProfitPrice data={data} value={'1.40220'} />
+                {shortTakeProfitPrice? (
+                     <TakeProfitPrice value={shortTakeProfitPrice.toFixed(5)} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <SLMaximumLoss data={data} value={'$10.00 (1%)'} />
+                {shortSLMaximumLoss? (
+                     <SLMaximumLoss value={`$${shortSLMaximumLoss} (${(shortSLMaximumLossPercentage * 100)}%)`} />
+                ) : ''}
 
-                <TPMaximumProfit data={data} value={'$60.00 (6%)'} />
+                {shortTPMaximumProfit? (
+                    <TPMaximumProfit value={`$${shortTPMaximumProfit} (${(shortTPMaximumProfitPercentage * 100)}%)`}/>
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <SpreadPips data={data}/>
+                {shortSpreadPips? (
+                    <SpreadPips value={shortSpreadPips} />
+                ) : ''}
 
-                <SpreadCost data={data} value={'$0.14'} />
+                {shortSpreadCost? (
+                    <SpreadCost value={`$${shortSpreadCost.toFixed(2)}`} />
+                ) : ''}
 
-                <TotalPotentialLoss data={data} value={'$10.14'} />
+                {shortTotalPotentialLoss? (
+                    <TotalPotentialLoss value={`$${shortTotalPotentialLoss.toFixed(2)}`} />
+                ) : ''}
             </TableTbodyTemplate>
         </div>
     );

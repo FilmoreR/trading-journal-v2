@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type SpreadCostProps = {
-    data : any;
     value : string;
 };
 
 const SpreadCost = ({ 
-    data,
     value
 }: SpreadCostProps) => {
 

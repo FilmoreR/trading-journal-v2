@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type TakeProfitPriceProps = {
-    data : any;
     value : string;
 };
 
-const TakeProfitPrice = ({ 
-    data,
+const TakeProfitPrice = ({
     value
 }: TakeProfitPriceProps) => {
 

@@ -13,9 +13,10 @@ const RewardRatioPercemtage = ({
     data
 }: RewardRatioPercemtageProps) => {
 
+    const [rewardRatioPercemtage, setRewardRatioPercemtage] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setRewardRatioPercemtage(data._getTradeOrderComputationData.rewardRatioPercentage);
     },[]);
 
     return (
@@ -24,7 +25,7 @@ const RewardRatioPercemtage = ({
                 <div className={classNames(styles.descrption)}>Reward Ratio % <span className="text-xs font-light text-purple-600">(Risk Reward Ratio / Reward Ratio Value)</span></div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>10%</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{rewardRatioPercemtage}</div>
             </td>
         </tr>
     );

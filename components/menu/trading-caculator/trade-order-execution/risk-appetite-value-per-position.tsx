@@ -13,9 +13,10 @@ const RiskAppetiteValuePerPosition = ({
     data
 }: RiskAppetiteValuePerPositionProps) => {
 
+    const [riskAppetiteValuePerPosition, setRiskAppetiteValuePerPosition] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setRiskAppetiteValuePerPosition(data._getTradeOrderComputationData.riskAppetiteValuePerPosition);
     },[]);
 
     return (
@@ -24,7 +25,7 @@ const RiskAppetiteValuePerPosition = ({
                 <div className={classNames(styles.descrption)}>Risk Appetite Value Per Position <span className="text-xs font-light text-purple-600">(Risk Value Per Trade * Risk Appetite % Per Position)</span></div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>$10.00</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{`$${riskAppetiteValuePerPosition}`}</div>
             </td>
         </tr>
     );

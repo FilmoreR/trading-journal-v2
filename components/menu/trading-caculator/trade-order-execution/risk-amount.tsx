@@ -13,9 +13,10 @@ const RiskAmount = ({
     data
 }: RiskAmountProps) => {
 
+    const [riskAmount, setRiskAmount] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setRiskAmount(data._getTradeOrderComputationData.riskAmount);
     },[]);
 
     return (
@@ -24,7 +25,7 @@ const RiskAmount = ({
                 <div className={classNames(styles.descrption)}>Risk Amount <span className="text-xs font-light text-purple-600">(Capital × Risk Appetite % of Captial)</span></div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>$200.00</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{`$${riskAmount}`}</div>
             </td>
         </tr>
     );

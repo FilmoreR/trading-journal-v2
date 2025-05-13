@@ -13,10 +13,18 @@ const CurrencyPair = ({
     data
 }: CurrencyPairProps) => {
 
+    const [currencyPairList, setCurrencyPairList] = useState<any>([]);
+    const [currencyPair, setCurrencyPair] = useState<any>('');
+
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setCurrencyPairList(data.responseCurrencyPairs);
+        setCurrencyPair(data._getTradeOrderComputationData.currencyPair);
     },[]);
+
+    const handleChange = (e: any) => {
+        setCurrencyPair(e.target.value);
+    };
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -25,16 +33,25 @@ const CurrencyPair = ({
             </th>
             <td className="px-6 py-4 bg-orange-300 text-black">
                 <div className={`font-bold ${classNames(styles.value)}`}>
-                    {/* GBPUSD */}
-                    <select id="default" className="bg-orange-300 border text-right border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option data-spread="1.6" data-pip-value="0.0001" value="EURUSD" selected>EURUSD</option>
-                        <option data-spread="2" data-pip-value="0.01" value="USDJPY">USDJPY</option>
-                        <option data-spread="1.9" data-pip-value="0.0001" value="USDCHF">USDCHF</option>
-                        <option data-spread="2.3" data-pip-value="0.0001" value="AUDUSD">AUDUSD</option>
-                        <option data-spread="2.8" data-pip-value="0.0001" value="NZDUSD">NZDUSD</option>
-                        <option data-spread="1.8" data-pip-value="0.0001" value="GBPUSD">GBPUSD</option>
-                        <option data-spread="2.3" data-pip-value="0.0001" value="USDCAD">USDCAD</option>
-                    </select>
+                    {currencyPairList? (
+                        <select 
+                            id="default" 
+                            className="bg-orange-300 border text-right border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={currencyPair} 
+                            onChange={handleChange}>
+                            {currencyPairList.map((res : any, index : number) => (
+                                <option 
+                                    id={`curreny-${index}`} 
+                                    data-spread={res.averageSpread}
+                                    data-pip-value={res.pipsConversion}
+                                    data-stop-loss={res.stopLosslevel}
+                                    value={res.curreny} 
+                                    key={index}>
+                                        {res.curreny}
+                                </option>
+                            ))}
+                        </select>
+                    ) : ''}
                 </div>
             </td>
         </tr>

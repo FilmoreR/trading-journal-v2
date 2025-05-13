@@ -13,10 +13,16 @@ const AccountType = ({
     data
 }: AccountTypeProps) => {
 
+    const [inputValue, setInputValue] = useState<any>('');
+
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setInputValue(data._getTradeOrderComputationData.standardLot);
     },[]);
+
+    const handleChange = (e: any) => {
+        setInputValue(e.target.value);
+    };
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -25,8 +31,12 @@ const AccountType = ({
             </th>
             <td className="px-6 py-4 bg-orange-300 text-black">
                 <div className={`font-bold ${classNames(styles.value)}`}>
-                    {/* 100,000 */}
-                    <input type="text" id="small-input" className="font-bold text-right bg-orange-300 p-2.5 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" placeholder="100,000" value={'100,000'}/>
+                    <input type="text" 
+                        id="small-input" 
+                        className="font-bold text-right bg-orange-300 p-2.5 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
+                        placeholder="100,000" 
+                        value={inputValue}
+                        onChange={handleChange}/>
                 </div>
             </td>
         </tr>

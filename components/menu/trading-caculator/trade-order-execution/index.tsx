@@ -36,11 +36,6 @@ const TradeOrderExecution = ({
     data
 }: TradeOrderExecutionProps) => {
 
-    // Effect hook for any future initialization needs
-    useEffect(() => {
-
-    },[]);
-
     return (
         <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${classNames(styles.trade__order__execution)}`}>
             <TableTbodyTemplate>

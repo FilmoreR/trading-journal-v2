@@ -13,10 +13,12 @@ const TotalBuyingPower = ({
     data
 }: TotalBuyingPowerProps) => {
 
+    const [totalBuyingPower, setTotalBuyingPower] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setTotalBuyingPower(data._getTradeOrderComputationData.totalBuyingPower);
     },[]);
+    
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -24,7 +26,7 @@ const TotalBuyingPower = ({
                 <div className={classNames(styles.descrption)}>Total Buying Power <span className="text-xs font-light text-purple-600">(Capital * Leverage)</span></div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>$10,000.00</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{`$${totalBuyingPower}`}</div>
             </td>
         </tr>
     );

@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type ExpectedVolumeProps = {
-    data : any;
     value : string;
 };
 
-const ExpectedVolume = ({ 
-    data,
+const ExpectedVolume = ({
     value
 }: ExpectedVolumeProps) => {
 

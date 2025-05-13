@@ -6,12 +6,10 @@ import classNames from 'classnames';
  * Props interface for GalleryInformation component
  */
 type TotalPotentialLossProps = {
-    data : any;
     value : string;
 };
 
-const TotalPotentialLoss = ({ 
-    data,
+const TotalPotentialLoss = ({
     value
 }: TotalPotentialLossProps) => {
 

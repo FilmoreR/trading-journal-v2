@@ -30,10 +30,45 @@ type TradeBuyProps = {
 const TradeBuy = ({ 
     data
 }: TradeBuyProps) => {
+    const [buyStopLossPrice, setBuyStopLossPrice] = useState<any>('');
+    const [buyStopLossPips, setBuyStopLossPips] = useState<any>('');
+
+    const [buyPipValuePerLot, setBuyPipValuePerLot] = useState<any>('');
+    const [buyExpectedVolume, setBuyExpectedVolume] = useState<any>('');
+
+    const [buyTakeProfitPips, setBuyTakeProfitPips] = useState<any>('');
+    const [buyTakeProfitPrice, setBuyTakeProfitPrice] = useState<any>('');
+
+    const [buySLMaximumLoss, setBuySLMaximumLoss] = useState<any>('');
+    const [buySLMaximumLossPercentage, setBuySLMaximumLossPercentage] = useState<any>('');
+
+    const [buyTPMaximumProfit, setBuyTPMaximumProfit] = useState<any>('');
+    const [buyTPMaximumProfitPercentage, setBuyTPMaximumProfitPerentage] = useState<any>('');
+
+    const [buySpreadPips, setBuySpreadPips] = useState<any>('');
+    const [buySpreadCost, setBuySpreadCost] = useState<any>('');
+    const [buyTotalPotentialLoss, setBuyTotalPotentialLoss] = useState<any>('');
 
     // Effect hook for any future initialization needs
     useEffect(() => {
+        setBuyStopLossPrice(data._getTradeOrderComputationData.buyStopLossPrice);
+        setBuyStopLossPips(data._getTradeOrderComputationData.buyStopLossPips);
 
+        setBuyPipValuePerLot(data._getTradeOrderComputationData.buyPipValuePerLot);
+        setBuyExpectedVolume(data._getTradeOrderComputationData.buyExpectedVolume);
+
+        setBuyTakeProfitPips(data._getTradeOrderComputationData.buyTakeProfitPips);
+        setBuyTakeProfitPrice(data._getTradeOrderComputationData.buyTakeProfitPrice);
+
+        setBuySLMaximumLoss(data._getTradeOrderComputationData.buySLMaximumLoss);
+        setBuySLMaximumLossPercentage(data._getTradeOrderComputationData.buySLMaximumLossPercentage);
+
+        setBuyTPMaximumProfit(data._getTradeOrderComputationData.buyTPMaximumProfit);
+        setBuyTPMaximumProfitPerentage(data._getTradeOrderComputationData.buyTPMaximumProfitPercentage);
+
+        setBuySpreadPips(data._getTradeOrderComputationData.buySpreadPips);
+        setBuySpreadCost(data._getTradeOrderComputationData.buySpreadCost);
+        setBuyTotalPotentialLoss(data._getTradeOrderComputationData.buyTotalPotentialLoss);
     },[]);
 
     return (
@@ -41,41 +76,61 @@ const TradeBuy = ({
             <h5 className="text-xl font-bold dark:text-white text-emerald-700">BUY / LONG</h5>
             <br />
             <TableTbodyTemplate>
-                <StopLossPrice 
-                    data={data}
-                    value={'1.30960'}
-                    formulaDescription={'(Entry Price - (Entry Price * Stop Loss level %)'} />
+                {buyStopLossPrice? (
+                    <StopLossPrice 
+                        value={buyStopLossPrice.toFixed(5)}
+                        formulaDescription={'(Entry Price - (Entry Price * Stop Loss level %)'} />
+                ) : ''}
 
-                <StopLossPips 
-                    data={data}
-                    value={'132.283'}
-                    formulaDescription={'((Entry Price - Stop Loss Price) / Pips Conversion)'} />
+                {buyStopLossPips? (
+                    <StopLossPips 
+                        value={buyStopLossPips.toFixed(3)}
+                        formulaDescription={'((Entry Price - Stop Loss Price) / Pips Conversion)'} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <PipValuePerLot data={data} value={'$7.56'} />
+                {buyPipValuePerLot? (
+                    <PipValuePerLot value={`$${buyPipValuePerLot.toFixed(2)}`} />
+                ) : ''}
 
-                <ExpectedVolume data={data} value={'0.01'} />
+                {buyExpectedVolume? (
+                    <ExpectedVolume value={buyExpectedVolume.toFixed(2)} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <TakeProfitPips data={data} value={'793.69'} />
+                {buyTakeProfitPips? (
+                    <TakeProfitPips value={buyTakeProfitPips.toFixed(2)} />
+                ) : ''}
 
-                <TakeProfitPrice data={data} value={'1.40220'} />
+                {buyTakeProfitPrice? (
+                     <TakeProfitPrice value={buyTakeProfitPrice.toFixed(5)} />
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <SLMaximumLoss data={data} value={'$10.00 (1%)'} />
+                {buySLMaximumLoss? (
+                     <SLMaximumLoss value={`$${buySLMaximumLoss} (${(buySLMaximumLossPercentage * 100)}%)`} />
+                ) : ''}
 
-                <TPMaximumProfit data={data} value={'$60.00 (6%)'} />
+                {buyTPMaximumProfit? (
+                    <TPMaximumProfit value={`$${buyTPMaximumProfit} (${(buyTPMaximumProfitPercentage * 100)}%)`}/>
+                ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <SpreadPips data={data}/>
+                {buySpreadPips? (
+                    <SpreadPips value={buySpreadPips} />
+                ) : ''}
 
-                <SpreadCost data={data} value={'$0.14'} />
+                {buySpreadCost? (
+                    <SpreadCost value={`$${buySpreadCost.toFixed(2)}`} />
+                ) : ''}
 
-                <TotalPotentialLoss data={data} value={'$10.14'} />
+                {buyTotalPotentialLoss? (
+                    <TotalPotentialLoss value={`$${buyTotalPotentialLoss.toFixed(2)}`} />
+                ) : ''}
             </TableTbodyTemplate>
         </div>
     );

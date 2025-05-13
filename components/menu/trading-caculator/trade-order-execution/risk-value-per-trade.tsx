@@ -13,9 +13,11 @@ const RiskValuePerTrade = ({
     data
 }: RiskValuePerTradeProps) => {
 
+     const [riskValuePerTrade, setRiskValuePerTrade] = useState<any>('');
+
     // Effect hook for any future initialization needs
     useEffect(() => {
-
+        setRiskValuePerTrade(data._getTradeOrderComputationData.riskValuePerTrade);
     },[]);
 
     return (
@@ -24,7 +26,7 @@ const RiskValuePerTrade = ({
                 <div className={classNames(styles.descrption)}>Risk Value Per Trade <span className="text-xs font-light text-purple-600">(Capital *Risk  % of Capital  Per Trade)</span></div>
             </th>
             <td className="px-6 py-4 text-black bg-yellow-50">
-                <div className={`font-bold ${classNames(styles.value)}`}>$20.00</div>
+                <div className={`font-bold ${classNames(styles.value)}`}>{`$${riskValuePerTrade}`}</div>
             </td>
         </tr>
     );

@@ -3,22 +3,11 @@ import styles from './styles.module.scss';
 import classNames from 'classnames';
 
 import TableTbodyTemplate from '../../../templates/table-tbody';
-
-import StopLossPrice from './stop-loss-price';
-import StopLossPips from './stop-loss-pips';
-
-import PipValuePerLot from './pip-value-per-lot';
-import ExpectedVolume from './expected-volume';
-
-import TakeProfitPips from './take-profit-pips';
-import TakeProfitPrice from './take-profit-price';
-
-import SLMaximumLoss from './sl-maximum-loss';
-import TPMaximumProfit from './tp-maximum-profit';
+import tradeCaculatorLabel from '../../../../constants/trade-caculator-label';
+import Common from './common';
 
 import SpreadPips from './spread-pips';
-import SpreadCost from './spread-cost';
-import TotalPotentialLoss from './total-potential-loss';
+import AdjustStopLevel from './adjust-stop-level';
 
 /**
  * Props interface for GalleryInformation component
@@ -48,6 +37,7 @@ const TradeShort = ({
     const [shortSpreadPips, setShortSpreadPips] = useState<any>('');
     const [shortSpreadCost, setShortSpreadCost] = useState<any>('');
     const [shortTotalPotentialLoss, setShortTotalPotentialLoss] = useState<any>('');
+    const [shortTotalPotentialProfi, setShortTotalPotentialProfit] = useState<any>('');
 
     // Effect hook for any future initialization needs
     useEffect(() => {
@@ -69,6 +59,7 @@ const TradeShort = ({
         setShortSpreadPips(data._getTradeOrderComputationData.shortSpreadPips);
         setShortSpreadCost(data._getTradeOrderComputationData.shortSpreadCost);
         setShortTotalPotentialLoss(data._getTradeOrderComputationData.shortTotalPotentialLoss);
+        setShortTotalPotentialProfit(data._getTradeOrderComputationData.shortTotalPotentialLoss);
     },[]);
 
     return (
@@ -77,60 +68,127 @@ const TradeShort = ({
             <br />
             <TableTbodyTemplate>
                 {shortStopLossPrice? (
-                    <StopLossPrice 
-                        value={shortStopLossPrice.toFixed(5)}
-                        formulaDescription={'(Entry Price + (Entry Price * Stop Loss level %)'} />
+                    <Common label={tradeCaculatorLabel().stopLossPriceShort} data={shortStopLossPrice.toFixed(5)} />
                 ) : ''}
 
                 {shortStopLossPips? (
-                    <StopLossPips 
-                        value={shortStopLossPips.toFixed(3)}
-                        formulaDescription={'(( Stop Loss Price - Entry Price) / Pips Conversion)'} />
+                    <Common label={tradeCaculatorLabel().stopLossPipsShort} data={shortStopLossPips.toFixed(3)} />
                 ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
                 {shortPipValuePerLot? (
-                    <PipValuePerLot value={`$${shortPipValuePerLot.toFixed(2)}`} />
+                    <Common label={tradeCaculatorLabel().pipValuePerLot} data={shortPipValuePerLot.toFixed(2)} />
                 ) : ''}
 
                 {shortExpectedVolume? (
-                    <ExpectedVolume value={shortExpectedVolume.toFixed(2)} />
+                    <Common label={tradeCaculatorLabel().expectedVolume} data={shortExpectedVolume.toFixed(2)} />
                 ) : ''}
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
                 {shortTakeProfitPips? (
-                    <TakeProfitPips value={shortTakeProfitPips.toFixed(2)} />
+                    <Common label={tradeCaculatorLabel().takeProfitPips} data={shortTakeProfitPips.toFixed(2)} />
                 ) : ''}
 
                 {shortTakeProfitPrice? (
-                     <TakeProfitPrice value={shortTakeProfitPrice.toFixed(5)} />
+                     <Common label={tradeCaculatorLabel().takeProfitPrice} data={shortTakeProfitPrice.toFixed(5)} />
                 ) : ''}
             </TableTbodyTemplate>
             <br />
+            {/* This is for USDJPY caculation */}
             <TableTbodyTemplate>
                 {shortSLMaximumLoss? (
-                     <SLMaximumLoss value={`$${shortSLMaximumLoss} (${(shortSLMaximumLossPercentage * 100)}%)`} />
+                     <Common label={tradeCaculatorLabel().SLMaximumLossUSDJPY} data={`$${shortSLMaximumLoss} (${(shortSLMaximumLossPercentage * 100)}%)`} />
                 ) : ''}
 
                 {shortTPMaximumProfit? (
-                    <TPMaximumProfit value={`$${shortTPMaximumProfit} (${(shortTPMaximumProfitPercentage * 100)}%)`}/>
+                    <Common label={tradeCaculatorLabel().TPMaximumProfitUSDJPY} data={`$${shortTPMaximumProfit} (${(shortTPMaximumProfitPercentage * 100)}%)`} />
                 ) : ''}
             </TableTbodyTemplate>
+            {/* This is for USDJPY caculation */}
             <br />
             <TableTbodyTemplate>
                 {shortSpreadPips? (
-                    <SpreadPips value={shortSpreadPips} />
+                    <SpreadPips label={tradeCaculatorLabel().spreadPips} value={shortSpreadPips} />
                 ) : ''}
 
                 {shortSpreadCost? (
-                    <SpreadCost value={`$${shortSpreadCost.toFixed(2)}`} />
+                    <Common label={tradeCaculatorLabel().spreadCost} data={`$${shortSpreadCost.toFixed(2)}`} />
+                ) : ''}
+                {/* This is for USDJPY caculation */}
+                {shortTotalPotentialLoss? (
+                    <Common label={tradeCaculatorLabel().totalPotentialLossUSDJPY} data={`$${shortTotalPotentialLoss.toFixed(2)}`} />
                 ) : ''}
 
-                {shortTotalPotentialLoss? (
-                    <TotalPotentialLoss value={`$${shortTotalPotentialLoss.toFixed(2)}`} />
+                {shortTotalPotentialProfi? (
+                    <Common label={tradeCaculatorLabel().totalPotentialProfitUSDJPY} data={`$60.17`} />
                 ) : ''}
+                {/* This is for USDJPY caculation */}
+            </TableTbodyTemplate>
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().lotSize} data={`2000`} />
+            </TableTbodyTemplate>
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().lossPipsMovedShort} data={`0.00666`} />
+                <Common label={tradeCaculatorLabel().loss} data={`$13.13 (1.3%)`} />
+            </TableTbodyTemplate>
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().profitPipsMovedShort} data={`0.03998`} />
+                <Common label={tradeCaculatorLabel().profit} data={`$79.95 (8%)`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <AdjustStopLevel label={tradeCaculatorLabel().adjustStopLevel} value={'0.42'} />
+                <Common label={tradeCaculatorLabel().newStopLossShort} data={`1.33815`} />
+                <Common label={tradeCaculatorLabel().newStopLossUSDJPYShort} data={`59.72306`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWSLMaximumLossUSDJPY} data={`$8.20 (8.2%)`} />
+                <Common label={tradeCaculatorLabel().NEWTotalPotentialLossUSDJPY} data={`$8.54`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWTakeProfitPipsUSDJPY} data={`358.33836`} />
+                <Common label={tradeCaculatorLabel().NEWTakeProfitPriceUSDJPY} data={`149.2493836`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWTPMaximumProfitUSDJPY} data={`$49.20 (4.92%)`} />
+                <Common label={tradeCaculatorLabel().NEWTotalPotentialProfitUSDJPY} data={`$49.54`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWLossPipsMovedShort} data={`0.00560`} />
+                <Common label={tradeCaculatorLabel().NEWLoss} data={`$11.19 (1.12%)`} />
+                <Common label={tradeCaculatorLabel().NEWStopLossShort} data={`55.9671`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWTakeProfitPips} data={`335.8026`} />
+                <Common label={tradeCaculatorLabel().NEWTakeProfitPriceShort} data={`1.29897`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().NEWTakeProfitShort} data={`0.03358`} />
+                <Common label={tradeCaculatorLabel().NEWTakeProfit} data={`$67.16 (6.72%)`} />
+            </TableTbodyTemplate>
+
+            <br />
+            <TableTbodyTemplate>
+                <Common label={tradeCaculatorLabel().totalPotentialLoss} data={`$11.55`} />
+                <Common label={tradeCaculatorLabel().totalPotentialProfit} data={`$67.52`} />
             </TableTbodyTemplate>
         </div>
     );

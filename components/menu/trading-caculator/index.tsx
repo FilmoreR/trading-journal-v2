@@ -123,11 +123,15 @@ const TradingCalculator = ({
         });
     };
 
+    const handleChangeAccountType = (value: any) => {
+        console.log("handleChangeAccountType value ------>", value);
+    };
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
                 {updateData? (
-                    <TradeOrderExecution data={updateData}/>
+                    <TradeOrderExecution onChangeAccountType={handleChangeAccountType} data={updateData}/>
                 ) : ''}
             </div>
             <div>

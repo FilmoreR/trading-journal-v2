@@ -5,24 +5,24 @@ import classNames from 'classnames';
 /**
  * Props interface for GalleryInformation component
  */
-type SpreadPipsProps = {
+type AdjustStopLevelProps = {
     value : any;
     label : any;
 };
 
-const SpreadPips = ({ 
+const AdjustStopLevel = ({ 
     value,
     label
-}: SpreadPipsProps) => {
+}: AdjustStopLevelProps) => {
 
-    const [spreadPips, setSpreadPips] = useState<any>('');
+    const [adjustStopLevel, setAdjustStopLevel] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-        setSpreadPips(value);
+        setAdjustStopLevel(value);
     },[]);
 
     const handleChange = (e: any) => {
-        setSpreadPips(e.target.value);
+        setAdjustStopLevel(e.target.value);
     };
 
     return (
@@ -39,12 +39,12 @@ const SpreadPips = ({
                     type="text" 
                     id="standard-lot" 
                     className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
-                    placeholder={spreadPips}
-                    value={spreadPips}
+                    placeholder={adjustStopLevel}
+                    value={adjustStopLevel}
                     onChange={handleChange}/>
             </td>
         </tr>
     );
 };
 
-export default SpreadPips;
+export default AdjustStopLevel;

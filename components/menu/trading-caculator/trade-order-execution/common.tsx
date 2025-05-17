@@ -5,46 +5,37 @@ import classNames from 'classnames';
 /**
  * Props interface for GalleryInformation component
  */
-type SpreadPipsProps = {
-    value : any;
+type CommonProps = {
+    data : any; // Data to be displayed in the gallery information
     label : any;
 };
 
-const SpreadPips = ({ 
-    value,
+const Common = ({ 
+    data,
     label
-}: SpreadPipsProps) => {
+}: CommonProps) => {
+    
+    const [dataValue, setDataValue] = useState<any>('');
 
-    const [spreadPips, setSpreadPips] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-        setSpreadPips(value);
+        setDataValue(data);
     },[]);
-
-    const handleChange = (e: any) => {
-        setSpreadPips(e.target.value);
-    };
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
             <th scope="row" className={`px-6 py-4 font-medium text-gray-900 whitespace-nowrap ${label.titleBG ? label.titleBG : 'bg-gray-100'} dark:text-white dark:bg-gray-800 ${classNames(styles.table_head)}`}>
-                <div className={classNames(styles.descrption)}>{label.title? label.title : ''} 
+                <div className={`${label.titleColor ? label.titleColor : ''} ${classNames(styles.descrption)}`}>{label.title? label.title : ''} 
                     {label.description? (
                         <span className={`text-xs font-light ${label.descriptionColor? label.descriptionColor : 'text-purple-600'}`}> {label.description}</span>
                     ) : ''} 
                 </div>
             </th>
             <td className={`px-6 py-4 ${label.valueBG? label.valueBG : 'bg-orange-300'} text-black`}>
-                <input 
-                    type="text" 
-                    id="standard-lot" 
-                    className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
-                    placeholder={spreadPips}
-                    value={spreadPips}
-                    onChange={handleChange}/>
+                <div className={`font-bold ${classNames(styles.value)} ${label.valueColor? label.valueColor : ''}`}>{dataValue}</div>
             </td>
         </tr>
     );
 };
 
-export default SpreadPips;
+export default Common;

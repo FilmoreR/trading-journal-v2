@@ -3,24 +3,17 @@ import styles from './styles.module.scss';
 import classNames from 'classnames';
 
 import TableTbodyTemplate from '../../../templates/table-tbody';
+import tradeCaculatorLabel from '../../../../constants/trade-caculator-label';
+import Common from './common';
 
 import AccountType from './account-type';
 import Capital from './capital';
 import CurrencyPair from './currency-pair';
-import PipsConversion from './pips-conversion';
 import RiskPercentagePerTrade from './risk-percentage-per-trade';
-import RiskValuePerTrade from './risk-value-per-trade';
 import RiskAppetitePercentagePerPosition from './risk-appetite-percentage-per-position';
-import RiskAppetiteValuePerPosition from './risk-appetite-value-per-position';
-import RiskAppetiteCapital from './risk-appetite-capital';
 import RiskRewardRatio from './risk-reward-ratio';
-import RewardRatioValue from './reward-ratio-value';
-import RewardRatioPercemtage from './reward-ratio-percentage';
 
 import Leverage from './leverage';
-import TotalBuyingPower from './total-buying-power';
-import TotalRiskValue from './total-risk-value';
-import RiskAmount from './risk-amount';
 
 import EntryPrice from './entry-price';
 import StopLossLevel from './stop-loss-level';
@@ -30,54 +23,56 @@ import StopLossLevel from './stop-loss-level';
  */
 type TradeOrderExecutionProps = {
     data : any; // Data to be displayed in the gallery information
+    onChangeAccountType: (e: any) => void;
 };
 
 const TradeOrderExecution = ({ 
-    data
+    data,
+    onChangeAccountType
 }: TradeOrderExecutionProps) => {
 
     return (
         <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${classNames(styles.trade__order__execution)}`}>
             <TableTbodyTemplate>
-                <AccountType data={data} />
+                <AccountType label={tradeCaculatorLabel().accountType} data={data} getChangeData={onChangeAccountType}/>
 
-                <Capital data={data} />
+                <Capital label={tradeCaculatorLabel().capital} data={data} />
 
-                <CurrencyPair data={data} />
+                <CurrencyPair label={tradeCaculatorLabel().currencyPair} data={data} />
 
-                <PipsConversion data={data} />
+                <Common label={tradeCaculatorLabel().pipsConversion} data={data._getTradeOrderComputationData.pipsConversion} />
 
-                <RiskPercentagePerTrade data={data} />
+                <RiskPercentagePerTrade label={tradeCaculatorLabel().riskPercentagePerTrade} data={data} />
 
-                <RiskValuePerTrade data={data} />
+                <Common label={tradeCaculatorLabel().riskValuePerTrade} data={`$${data._getTradeOrderComputationData.riskValuePerTrade}`} />
 
-                <RiskAppetitePercentagePerPosition data={data} />
+                <RiskAppetitePercentagePerPosition label={tradeCaculatorLabel().riskAppetitePercentagePerPosition} data={data} />
 
-                <RiskAppetiteValuePerPosition data={data} />
+                <Common label={tradeCaculatorLabel().riskAppetiteValuePerPosition} data={`$${data._getTradeOrderComputationData.riskAppetiteValuePerPosition}`} />
 
-                <RiskAppetiteCapital data={data} />
+                <Common label={tradeCaculatorLabel().riskAppetiteCapital} data={data._getTradeOrderComputationData.riskAppetitePercentageCapital} />
 
-                <RiskRewardRatio data={data} />
+                <RiskRewardRatio label={tradeCaculatorLabel().riskRewardRatio} data={data} />
 
-                <RewardRatioValue data={data} />
+                <Common label={tradeCaculatorLabel().rewardRatioValue} data={`$${data._getTradeOrderComputationData.rewardRatioValue}`} />
 
-                <RewardRatioPercemtage data={data} />
+                <Common label={tradeCaculatorLabel().rewardRatioPercentage} data={data._getTradeOrderComputationData.rewardRatioPercentage} />
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <Leverage data={data} />
+                <Leverage label={tradeCaculatorLabel().leverage} data={data} />
 
-                <TotalBuyingPower data={data} />
+                <Common label={tradeCaculatorLabel().totalBuyingPower} data={`$${data._getTradeOrderComputationData.totalBuyingPower}`} />
 
-                <TotalRiskValue data={data} />
+                <Common label={tradeCaculatorLabel().totalRiskValue} data={`$${data._getTradeOrderComputationData.totalRiskValue}`} />
 
-                <RiskAmount data={data} />
+                <Common label={tradeCaculatorLabel().riskAmount} data={`$${data._getTradeOrderComputationData.riskAmount}`} />
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <EntryPrice data={data} />
+                <EntryPrice label={tradeCaculatorLabel().entryPrice} data={data} />
 
-                <StopLossLevel data={data} />
+                <StopLossLevel label={tradeCaculatorLabel().stopLossLevel} data={data} />
             </TableTbodyTemplate>
         </div>
     );

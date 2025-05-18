@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type CurrencyPairProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const CurrencyPair = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: CurrencyPairProps) => {
 
     const [currencyPairList, setCurrencyPairList] = useState<any>([]);
@@ -26,6 +28,7 @@ const CurrencyPair = ({
 
     const handleChange = (e: any) => {
         setCurrencyPair(e.target.value);
+        getChangeData(e);
     };
 
     return (

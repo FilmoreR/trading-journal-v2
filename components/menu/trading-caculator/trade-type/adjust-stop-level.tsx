@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type AdjustStopLevelProps = {
     value : any;
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const AdjustStopLevel = ({ 
     value,
-    label
+    label,
+    getChangeData
 }: AdjustStopLevelProps) => {
 
     const [adjustStopLevel, setAdjustStopLevel] = useState<any>('');
@@ -23,6 +25,7 @@ const AdjustStopLevel = ({
 
     const handleChange = (e: any) => {
         setAdjustStopLevel(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

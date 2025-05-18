@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type StopLossLevelProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const StopLossLevel = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: StopLossLevelProps) => {
 
     const [stopLossLevel, seStopLossLevel] = useState<any>('');
@@ -23,6 +25,7 @@ const StopLossLevel = ({
 
     const handleChange = (e: any) => {
         seStopLossLevel(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type EntryPriceProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const EntryPrice = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: EntryPriceProps) => {
 
     const [entryPrice, setEntryPrice] = useState<any>('');
@@ -23,6 +25,7 @@ const EntryPrice = ({
 
     const handleChange = (e: any) => {
         setEntryPrice(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

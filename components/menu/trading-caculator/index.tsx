@@ -127,21 +127,94 @@ const TradingCalculator = ({
         console.log("handleChangeAccountType value ------>", value);
     };
 
+    const handleChangeCapital = (value: any) => {
+        console.log("handleChangeCapital value ------>", value);
+    };
+
+    const handleChangeCurrencyPair = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedIndex = event.target.selectedIndex;
+        const selectedOption = event.target.options[selectedIndex];
+
+        const pipValue = selectedOption.getAttribute("data-pip-value");
+        const spread = selectedOption.getAttribute("data-spread");
+        const stopLoss = selectedOption.getAttribute("data-stop-loss");
+
+        console.log("handleCurrencyPair pipValue ------>", pipValue);
+        console.log("handleCurrencyPair spread ------>", spread);
+        console.log("handleCurrencyPair stopLoss ------>", stopLoss);
+    };
+
+    const handleChangeRiskPercentagePerTrade = (value: any) => {
+        console.log("handleChangeRiskPercentagePerTrade value ------>", value);
+    };
+
+    const handleChangeRiskAppetitePercentagePerPosition = (value: any) => {
+        console.log("handleChangeRiskAppetitePercentagePerPosition value ------>", value);
+    };
+
+    const handleChangeRiskRewardRatio = (value: any) => {
+        console.log("handleChangeRiskRewardRatio value ------>", value);
+    };
+
+    const handleChangeLeverage = (value: any) => {
+        console.log("handleChangeLeverage value ------>", value);
+    };
+
+    const handleChangeEntryPrice = (value: any) => {
+        console.log("handleChangeEntryPrice value ------>", value);
+    };
+
+    const handleChangeStopLossLevel = (value: any) => {
+        console.log("handleChangeStopLossLevel value ------>", value);
+    };
+
+    const handleChangeSpreadPipsBuy= (value: any) => {
+        console.log("handleChangeSpreadPipsBuy value ------>", value);
+    };
+
+    const handleChangeSpreadPipsShort= (value: any) => {
+        console.log("handleChangeSpreadPipsShort value ------>", value);
+    };
+
+    const handleChangeAdjustStopLevelBuy= (value: any) => {
+        console.log("handleChangeAdjustStopLevelBuy value ------>", value);
+    };
+
+    const handleChangeAdjustStopLevelShort= (value: any) => {
+        console.log("handleChangeAdjustStopLevelShort value ------>", value);
+    };
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
                 {updateData? (
-                    <TradeOrderExecution onChangeAccountType={handleChangeAccountType} data={updateData}/>
+                    <TradeOrderExecution 
+                        onChangeAccountType={handleChangeAccountType}
+                        onChangeCapital={handleChangeCapital}
+                        onChangeCurrencyPair={handleChangeCurrencyPair}
+                        onChangeRiskPercentagePerTrade={handleChangeRiskPercentagePerTrade}
+                        onChangeRiskAppetitePercentagePerPosition={handleChangeRiskAppetitePercentagePerPosition}
+                        onChangeRiskRewardRatio={handleChangeRiskRewardRatio}
+                        onChangeLeverage={handleChangeLeverage}
+                        onChangeEntryPrice={handleChangeEntryPrice}
+                        onChangeStopLossLevel={handleChangeStopLossLevel}
+                        data={updateData}/>
                 ) : ''}
             </div>
             <div>
                 {updateData? (
-                    <TradeBuy data={updateData}/>
+                    <TradeBuy 
+                        onChangeSpreadPipsBuy={handleChangeSpreadPipsBuy}
+                        onChangeAdjustStopLevelBuy={handleChangeAdjustStopLevelBuy}
+                        data={updateData}/>
                 ) : ''}
             </div>
             <div>
                 {updateData? (
-                    <TradeShort data={updateData}/>
+                    <TradeShort 
+                        onChangeSpreadPipsShort={handleChangeSpreadPipsShort}
+                        onChangeAdjustStopLevelShort={handleChangeAdjustStopLevelShort}
+                        data={updateData}/>
                 ) : ''}
             </div>
         </div>

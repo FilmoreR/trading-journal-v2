@@ -24,11 +24,27 @@ import StopLossLevel from './stop-loss-level';
 type TradeOrderExecutionProps = {
     data : any; // Data to be displayed in the gallery information
     onChangeAccountType: (e: any) => void;
+    onChangeCapital: (e: any) => void;
+    onChangeCurrencyPair: (e: any) => void;
+    onChangeRiskPercentagePerTrade: (e: any) => void;
+    onChangeRiskAppetitePercentagePerPosition: (e: any) => void;
+    onChangeRiskRewardRatio: (e: any) => void;
+    onChangeLeverage: (e: any) => void;
+    onChangeEntryPrice: (e: any) => void;
+    onChangeStopLossLevel: (e: any) => void;
 };
 
 const TradeOrderExecution = ({ 
     data,
-    onChangeAccountType
+    onChangeAccountType,
+    onChangeCapital,
+    onChangeCurrencyPair,
+    onChangeRiskPercentagePerTrade,
+    onChangeRiskAppetitePercentagePerPosition,
+    onChangeRiskRewardRatio,
+    onChangeLeverage,
+    onChangeEntryPrice,
+    onChangeStopLossLevel
 }: TradeOrderExecutionProps) => {
 
     return (
@@ -36,23 +52,23 @@ const TradeOrderExecution = ({
             <TableTbodyTemplate>
                 <AccountType label={tradeCaculatorLabel().accountType} data={data} getChangeData={onChangeAccountType}/>
 
-                <Capital label={tradeCaculatorLabel().capital} data={data} />
+                <Capital label={tradeCaculatorLabel().capital} data={data} getChangeData={onChangeCapital}/>
 
-                <CurrencyPair label={tradeCaculatorLabel().currencyPair} data={data} />
+                <CurrencyPair label={tradeCaculatorLabel().currencyPair} data={data} getChangeData={onChangeCurrencyPair} />
 
                 <Common label={tradeCaculatorLabel().pipsConversion} data={data._getTradeOrderComputationData.pipsConversion} />
 
-                <RiskPercentagePerTrade label={tradeCaculatorLabel().riskPercentagePerTrade} data={data} />
+                <RiskPercentagePerTrade label={tradeCaculatorLabel().riskPercentagePerTrade} data={data} getChangeData={onChangeRiskPercentagePerTrade} />
 
                 <Common label={tradeCaculatorLabel().riskValuePerTrade} data={`$${data._getTradeOrderComputationData.riskValuePerTrade}`} />
 
-                <RiskAppetitePercentagePerPosition label={tradeCaculatorLabel().riskAppetitePercentagePerPosition} data={data} />
+                <RiskAppetitePercentagePerPosition label={tradeCaculatorLabel().riskAppetitePercentagePerPosition} data={data} getChangeData={onChangeRiskAppetitePercentagePerPosition} />
 
                 <Common label={tradeCaculatorLabel().riskAppetiteValuePerPosition} data={`$${data._getTradeOrderComputationData.riskAppetiteValuePerPosition}`} />
 
                 <Common label={tradeCaculatorLabel().riskAppetiteCapital} data={data._getTradeOrderComputationData.riskAppetitePercentageCapital} />
 
-                <RiskRewardRatio label={tradeCaculatorLabel().riskRewardRatio} data={data} />
+                <RiskRewardRatio label={tradeCaculatorLabel().riskRewardRatio} data={data} getChangeData={onChangeRiskRewardRatio} />
 
                 <Common label={tradeCaculatorLabel().rewardRatioValue} data={`$${data._getTradeOrderComputationData.rewardRatioValue}`} />
 
@@ -60,7 +76,7 @@ const TradeOrderExecution = ({
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <Leverage label={tradeCaculatorLabel().leverage} data={data} />
+                <Leverage label={tradeCaculatorLabel().leverage} data={data} getChangeData={onChangeLeverage} />
 
                 <Common label={tradeCaculatorLabel().totalBuyingPower} data={`$${data._getTradeOrderComputationData.totalBuyingPower}`} />
 
@@ -70,9 +86,9 @@ const TradeOrderExecution = ({
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <EntryPrice label={tradeCaculatorLabel().entryPrice} data={data} />
+                <EntryPrice label={tradeCaculatorLabel().entryPrice} data={data} getChangeData={onChangeEntryPrice} />
 
-                <StopLossLevel label={tradeCaculatorLabel().stopLossLevel} data={data} />
+                <StopLossLevel label={tradeCaculatorLabel().stopLossLevel} data={data} getChangeData={onChangeStopLossLevel} />
             </TableTbodyTemplate>
         </div>
     );

@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type RiskPercentagePerTradeProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const RiskPercentagePerTrade = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: RiskPercentagePerTradeProps) => {
 
     const [riskPercentagePerTrade, setRiskPercentagePerTrade] = useState<any>('');
@@ -23,6 +25,7 @@ const RiskPercentagePerTrade = ({
 
      const handleChange = (e: any) => {
         setRiskPercentagePerTrade(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

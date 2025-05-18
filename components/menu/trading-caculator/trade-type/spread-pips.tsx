@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type SpreadPipsProps = {
     value : any;
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const SpreadPips = ({ 
     value,
-    label
+    label,
+    getChangeData
 }: SpreadPipsProps) => {
 
     const [spreadPips, setSpreadPips] = useState<any>('');
@@ -23,6 +25,7 @@ const SpreadPips = ({
 
     const handleChange = (e: any) => {
         setSpreadPips(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

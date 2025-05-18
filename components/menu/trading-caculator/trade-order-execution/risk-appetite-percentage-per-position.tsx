@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type RiskAppetitePercentagePerPositionProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const RiskAppetitePercentagePerPosition = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: RiskAppetitePercentagePerPositionProps) => {
 
     const [riskAppetitePercentagePerPosition, setRiskAppetitePercentagePerPosition] = useState<any>('');
@@ -23,6 +25,7 @@ const RiskAppetitePercentagePerPosition = ({
 
      const handleChange = (e: any) => {
         setRiskAppetitePercentagePerPosition(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

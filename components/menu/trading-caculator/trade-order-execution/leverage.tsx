@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type LeverageProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const Leverage = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: LeverageProps) => {
 
     const [leverageList, setLeverageList] = useState<any>([]);
@@ -26,6 +28,7 @@ const Leverage = ({
 
     const handleChange = (e: any) => {
         setLeverage(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

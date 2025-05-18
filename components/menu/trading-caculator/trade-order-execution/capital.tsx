@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type CapitalProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const Capital = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: CapitalProps) => {
 
     const [inputValue, setInputValue] = useState<any>('');
@@ -24,6 +26,7 @@ const Capital = ({
 
     const handleChange = (e: any) => {
         setInputValue(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

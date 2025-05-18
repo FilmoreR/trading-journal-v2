@@ -14,10 +14,14 @@ import AdjustStopLevel from './adjust-stop-level';
  */
 type TradeBuyProps = {
     data : any; // Data to be displayed in the gallery information
+    onChangeSpreadPipsBuy: (e: any) => void;
+    onChangeAdjustStopLevelBuy: (e: any) => void;
 };
 
 const TradeBuy = ({ 
-    data
+    data,
+    onChangeSpreadPipsBuy,
+    onChangeAdjustStopLevelBuy
 }: TradeBuyProps) => {
     const [buyStopLossPrice, setBuyStopLossPrice] = useState<any>('');
     const [buyStopLossPips, setBuyStopLossPips] = useState<any>('');
@@ -110,7 +114,7 @@ const TradeBuy = ({
             <br />
             <TableTbodyTemplate>
                 {buySpreadPips? (
-                    <SpreadPips label={tradeCaculatorLabel().spreadPips} value={buySpreadPips} />
+                    <SpreadPips label={tradeCaculatorLabel().spreadPips} value={buySpreadPips} getChangeData={onChangeSpreadPipsBuy} />
                 ) : ''}
 
                 {buySpreadCost? (
@@ -144,7 +148,7 @@ const TradeBuy = ({
 
             <br />
             <TableTbodyTemplate>
-                <AdjustStopLevel label={tradeCaculatorLabel().adjustStopLevel} value={'0.42'} />
+                <AdjustStopLevel label={tradeCaculatorLabel().adjustStopLevel} value={'0.42'} getChangeData={onChangeAdjustStopLevelBuy} />
                 <Common label={tradeCaculatorLabel().newStopLossBuy} data={`1.32762`} />
                 <Common label={tradeCaculatorLabel().newStopLossUSDJPYBuy} data={`70.64801`} />
             </TableTbodyTemplate>

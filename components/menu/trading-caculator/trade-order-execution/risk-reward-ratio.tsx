@@ -8,11 +8,13 @@ import classNames from 'classnames';
 type RiskRewardRatioProps = {
     data : any; // Data to be displayed in the gallery information
     label : any;
+    getChangeData: (e: any) => void;
 };
 
 const RiskRewardRatio = ({ 
     data,
-    label
+    label,
+    getChangeData
 }: RiskRewardRatioProps) => {
 
     const [riskRewardRatio, setRiskRewardRatio] = useState<any>('');
@@ -23,6 +25,7 @@ const RiskRewardRatio = ({
 
     const handleChange = (e: any) => {
         setRiskRewardRatio(e.target.value);
+        getChangeData(e.target.value);
     };
 
     return (

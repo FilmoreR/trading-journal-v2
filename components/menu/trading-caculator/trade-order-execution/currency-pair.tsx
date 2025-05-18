@@ -28,7 +28,7 @@ const CurrencyPair = ({
 
     const handleChange = (e: any) => {
         setCurrencyPair(e.target.value);
-        getChangeData(e);
+        getChangeData(e.target.value);
     };
 
     return (

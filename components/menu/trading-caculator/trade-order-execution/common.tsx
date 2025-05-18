@@ -14,13 +14,6 @@ const Common = ({
     data,
     label
 }: CommonProps) => {
-    
-    const [dataValue, setDataValue] = useState<any>('');
-
-    // Effect hook for any future initialization needs
-    useEffect(() => {
-        setDataValue(data);
-    },[]);
 
     return (
         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -32,7 +25,7 @@ const Common = ({
                 </div>
             </th>
             <td className={`px-6 py-4 ${label.valueBG? label.valueBG : 'bg-orange-300'} text-black`}>
-                <div className={`font-bold ${classNames(styles.value)} ${label.valueColor? label.valueColor : ''}`}>{dataValue}</div>
+                <div className={`font-bold ${classNames(styles.value)} ${label.valueColor? label.valueColor : ''}`}>{data}</div>
             </td>
         </tr>
     );

@@ -47,6 +47,7 @@ const TradeOrderExecution = ({
     onChangeStopLossLevel
 }: TradeOrderExecutionProps) => {
 
+
     return (
         <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${classNames(styles.trade__order__execution)}`}>
             <TableTbodyTemplate>

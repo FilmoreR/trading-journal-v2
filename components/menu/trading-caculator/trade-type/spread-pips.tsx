@@ -17,14 +17,7 @@ const SpreadPips = ({
     getChangeData
 }: SpreadPipsProps) => {
 
-    const [spreadPips, setSpreadPips] = useState<any>('');
-    // Effect hook for any future initialization needs
-    useEffect(() => {
-        setSpreadPips(value);
-    },[]);
-
     const handleChange = (e: any) => {
-        setSpreadPips(e.target.value);
         getChangeData(e.target.value);
     };
 
@@ -42,8 +35,8 @@ const SpreadPips = ({
                     type="text" 
                     id="standard-lot" 
                     className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
-                    placeholder={spreadPips}
-                    value={spreadPips}
+                    placeholder={value}
+                    value={value}
                     onChange={handleChange}/>
             </td>
         </tr>

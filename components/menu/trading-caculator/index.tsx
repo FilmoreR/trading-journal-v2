@@ -95,24 +95,19 @@ const TradingCalculator = ({
             setResponseLeverage(leverage);
             setResponseCurrencyPairs(currencyPairs);
         }
+    }, []);
 
-        if (
-            responseTradeCaculatorDefaultData &&
-            responseLeverage &&
-            responseCurrencyPairs
+    useEffect(() => {
+        if (responseLeverage && responseCurrencyPairs
         ) {
-            onLoadComputeData();
+            onLoadComputeData(data.firebaseData.tradeCaculatorDefaultData);
         }
-    }, [
-        responseTradeCaculatorDefaultData, 
-        responseLeverage, 
-        responseCurrencyPairs
-    ]);
+    }, [responseLeverage, responseCurrencyPairs]);
 
 
-    const onLoadComputeData = () => {
+    const onLoadComputeData = (updatedObj : any) => {
         const _getTradeOrderComputationData = getTradeOrderComputationData(
-            responseTradeCaculatorDefaultData,
+            updatedObj,
             responseCurrencyPairs
         );
         
@@ -131,17 +126,17 @@ const TradingCalculator = ({
         console.log("handleChangeCapital value ------>", value);
     };
 
-    const handleChangeCurrencyPair = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedIndex = event.target.selectedIndex;
-        const selectedOption = event.target.options[selectedIndex];
+    const handleChangeCurrencyPair = (value: any) => {
+        // let _responseTradeCaculatorDefaultData = responseTradeCaculatorDefaultData;
+        // console.log("handleChangeCurrencyPair  ------> _responseTradeCaculatorDefaultData :", _responseTradeCaculatorDefaultData);
+        console.log("handleChangeCurrencyPair  ------> value :", value);
 
-        const pipValue = selectedOption.getAttribute("data-pip-value");
-        const spread = selectedOption.getAttribute("data-spread");
-        const stopLoss = selectedOption.getAttribute("data-stop-loss");
+        const updatedObj = {...responseTradeCaculatorDefaultData, currencyPair: value};
 
-        console.log("handleCurrencyPair pipValue ------>", pipValue);
-        console.log("handleCurrencyPair spread ------>", spread);
-        console.log("handleCurrencyPair stopLoss ------>", stopLoss);
+        setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, currencyPair: value}));
+        onLoadComputeData(updatedObj);
+
+        console.log("=======================================================");
     };
 
     const handleChangeRiskPercentagePerTrade = (value: any) => {
@@ -170,10 +165,12 @@ const TradingCalculator = ({
 
     const handleChangeSpreadPipsBuy= (value: any) => {
         console.log("handleChangeSpreadPipsBuy value ------>", value);
+        console.log("handleChangeSpreadPipsShort responseTradeCaculatorDefaultData ------>", responseTradeCaculatorDefaultData);
     };
 
     const handleChangeSpreadPipsShort= (value: any) => {
         console.log("handleChangeSpreadPipsShort value ------>", value);
+        console.log("handleChangeSpreadPipsShort responseTradeCaculatorDefaultData ------>", responseTradeCaculatorDefaultData);
     };
 
     const handleChangeAdjustStopLevelBuy= (value: any) => {
@@ -183,6 +180,10 @@ const TradingCalculator = ({
     const handleChangeAdjustStopLevelShort= (value: any) => {
         console.log("handleChangeAdjustStopLevelShort value ------>", value);
     };
+
+    console.log("updateData", updateData);
+    console.log("responseTradeCaculatorDefaultData", responseTradeCaculatorDefaultData);
+    console.log("--------------------------------------------------");
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

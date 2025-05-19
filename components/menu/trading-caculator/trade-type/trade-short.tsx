@@ -50,10 +50,10 @@ const TradeShort = ({
                     <TableTbodyTemplate>
                         <Common 
                             label={tradeCaculatorLabel().SLMaximumLossUSDJPY} 
-                            data={`$${data._getTradeOrderComputationData.shortSLMaximumLoss} (${(data._getTradeOrderComputationData.shortSLMaximumLossPercentage * 100)}%)`} />
+                            data={`$${data._getTradeOrderComputationData.shortSLMaximumLossUSDJPY.toFixed(2)} (${(data._getTradeOrderComputationData.shortSLMaximumLossPercentageUSDJPY * 100).toFixed(1)}%)`} />
                         <Common 
                             label={tradeCaculatorLabel().TPMaximumProfitUSDJPY} 
-                            data={`$${data._getTradeOrderComputationData.shortTPMaximumProfit} (${(data._getTradeOrderComputationData.shortTPMaximumProfitPercentage * 100)}%)`} />
+                            data={`$${data._getTradeOrderComputationData.shortTPMaximumProfitUSDJPY.toFixed(2)} (${(data._getTradeOrderComputationData.shortTPMaximumProfitPercentageUSDJPY * 100).toFixed(1)}%)`} />
                     </TableTbodyTemplate>
                     <br />
                 </div>
@@ -64,10 +64,10 @@ const TradeShort = ({
                 <Common label={tradeCaculatorLabel().spreadCost} data={`$${data._getTradeOrderComputationData.shortSpreadCost.toFixed(2)}`} />
                 {/* This is for USDJPY caculation */}
                 {currencyPair.toUpperCase() === 'USDJPY' ? (
-                    <Common label={tradeCaculatorLabel().totalPotentialLossUSDJPY} data={`$${data._getTradeOrderComputationData.shortTotalPotentialLoss.toFixed(2)}`} />
+                    <Common label={tradeCaculatorLabel().totalPotentialLossUSDJPY} data={`$${data._getTradeOrderComputationData.shortTotalPotentialLossUSDJPY.toFixed(2)}`} />
                 ) : ''}
                 {currencyPair.toUpperCase() === 'USDJPY' ? (
-                    <Common label={tradeCaculatorLabel().totalPotentialProfitUSDJPY} data={`$60.17`} />
+                    <Common label={tradeCaculatorLabel().totalPotentialProfitUSDJPY} data={`$${data._getTradeOrderComputationData.shortTotalPotentialProfitUSDJPY.toFixed(2)}`} />
                 ) : ''}
                 {/* This is for USDJPY caculation */}
             </TableTbodyTemplate>
@@ -75,47 +75,47 @@ const TradeShort = ({
                 <div>
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().lotSize} data={`2000`} />
+                        <Common label={tradeCaculatorLabel().lotSize} data={`${data._getTradeOrderComputationData.shortLotSize.toFixed(0)}`} />
                     </TableTbodyTemplate>
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().lossPipsMovedShort} data={`0.00666`} />
-                        <Common label={tradeCaculatorLabel().loss} data={`$13.13 (1.3%)`} />
+                        <Common label={tradeCaculatorLabel().lossPipsMovedShort} data={`${data._getTradeOrderComputationData.shortLossPipsMoved.toFixed(5)}`} />
+                        <Common label={tradeCaculatorLabel().loss} data={`$${data._getTradeOrderComputationData.shortLoss.toFixed(2)} (${(data._getTradeOrderComputationData.shortLossPercentage * 100).toFixed(2)}%)`} />
                     </TableTbodyTemplate>
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().profitPipsMovedShort} data={`0.03998`} />
-                        <Common label={tradeCaculatorLabel().profit} data={`$79.95 (8%)`} />
+                        <Common label={tradeCaculatorLabel().profitPipsMovedShort} data={`${data._getTradeOrderComputationData.shortProfitPipsMoved.toFixed(5)}`} />
+                        <Common label={tradeCaculatorLabel().profit} data={`$${data._getTradeOrderComputationData.shortProfit.toFixed(2)} (${(data._getTradeOrderComputationData.shortProfitPercentage * 100).toFixed(2)}%)`} />
                     </TableTbodyTemplate>
                 </div>
             ) : ''}
 
             <br />
             <TableTbodyTemplate>
-                <AdjustStopLevel label={tradeCaculatorLabel().adjustStopLevel} value={'0.42'} getChangeData={onChangeAdjustStopLevelShort} />
-                <Common label={tradeCaculatorLabel().newStopLossShort} data={`1.33815`} />
+                <AdjustStopLevel label={tradeCaculatorLabel().adjustStopLevel} value={data._getTradeOrderComputationData.shortAdjustStopLosslevelPercentage} getChangeData={onChangeAdjustStopLevelShort} />
+                <Common label={tradeCaculatorLabel().newStopLossShort} data={data._getTradeOrderComputationData.shortNEWStopLoss.toFixed(5)} />
                 {currencyPair.toUpperCase() === 'USDJPY' ? (
-                    <Common label={tradeCaculatorLabel().newStopLossUSDJPYShort} data={`59.72306`} />
+                    <Common label={tradeCaculatorLabel().newStopLossUSDJPYShort} data={data._getTradeOrderComputationData.shortNEWStopLossPipsUSDJPY.toFixed(2)} />
                 ) : ''}
             </TableTbodyTemplate>
             {currencyPair.toUpperCase() === 'USDJPY' ? (
                 <div>
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWSLMaximumLossUSDJPY} data={`$8.20 (8.2%)`} />
-                        <Common label={tradeCaculatorLabel().NEWTotalPotentialLossUSDJPY} data={`$8.54`} />
+                        <Common label={tradeCaculatorLabel().NEWSLMaximumLossUSDJPY} data={`$${data._getTradeOrderComputationData.shortNEWSLMaximumLossUSDJPY.toFixed(2)} (${(data._getTradeOrderComputationData.shortNEWSLMaximumLossPercentageUSDJPY * 100).toFixed(2)}%)`} />
+                        <Common label={tradeCaculatorLabel().NEWTotalPotentialLossUSDJPY} data={`$${data._getTradeOrderComputationData.shortNEWTotalPotentialLossUSDJPY.toFixed(2)}`} />
                     </TableTbodyTemplate>
 
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWTakeProfitPipsUSDJPY} data={`358.33836`} />
-                        <Common label={tradeCaculatorLabel().NEWTakeProfitPriceUSDJPY} data={`149.2493836`} />
+                        <Common label={tradeCaculatorLabel().NEWTakeProfitPipsUSDJPY} data={`${data._getTradeOrderComputationData.shortNEWTakeProfitPipsUSDJPY.toFixed(3)}`}/>
+                        <Common label={tradeCaculatorLabel().NEWTakeProfitPriceUSDJPYShort} data={`${data._getTradeOrderComputationData.shortNEWTakeProfitPriceUSDJPY.toFixed(3)}`} />
                     </TableTbodyTemplate>
 
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWTPMaximumProfitUSDJPY} data={`$49.20 (4.92%)`} />
-                        <Common label={tradeCaculatorLabel().NEWTotalPotentialProfitUSDJPY} data={`$49.54`} />
+                        <Common label={tradeCaculatorLabel().NEWTPMaximumProfitUSDJPY} data={`$${data._getTradeOrderComputationData.shortNEWTPMaximumProfitUSDJPY.toFixed(2)} (${(data._getTradeOrderComputationData.shortNEWTPMaximumProfitPercentageUSDJPY * 100).toFixed(2)}%)`} />
+                        <Common label={tradeCaculatorLabel().NEWTotalPotentialProfitUSDJPY} data={`$${data._getTradeOrderComputationData.shortTotalPotentialLossProfitUSDJPY.toFixed(2)}`} />
                     </TableTbodyTemplate>
                 </div>
             ) : ''}
@@ -124,27 +124,27 @@ const TradeShort = ({
                 <div>
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWLossPipsMovedShort} data={`0.00560`} />
-                        <Common label={tradeCaculatorLabel().NEWLoss} data={`$11.19 (1.12%)`} />
-                        <Common label={tradeCaculatorLabel().NEWStopLossShort} data={`55.9671`} />
+                        <Common label={tradeCaculatorLabel().NEWLossPipsMovedShort} data={`${data._getTradeOrderComputationData.shortNEWLossPipsMoved.toFixed(5)}`} />
+                        <Common label={tradeCaculatorLabel().NEWLoss} data={`$${data._getTradeOrderComputationData.shortyNEWLoss.toFixed(2)} (${(data._getTradeOrderComputationData.shortNEWLossPercentage * 100).toFixed(2)}%)`} />
+                        <Common label={tradeCaculatorLabel().NEWStopLossShort} data={`${data._getTradeOrderComputationData.shortNEWStopLossPips.toFixed(5)}`}  />
                     </TableTbodyTemplate>
 
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWTakeProfitPips} data={`335.8026`} />
-                        <Common label={tradeCaculatorLabel().NEWTakeProfitPriceShort} data={`1.29897`} />
+                        <Common label={tradeCaculatorLabel().NEWTakeProfitPips} data={`${data._getTradeOrderComputationData.shortNEWTakeProfitPips.toFixed(5)}`} />
+                        <Common label={tradeCaculatorLabel().NEWTakeProfitPriceShort} data={`${data._getTradeOrderComputationData.shortNEWTakeProfitPrice.toFixed(5)}`} />
                     </TableTbodyTemplate>
 
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().NEWTakeProfitShort} data={`0.03358`} />
-                        <Common label={tradeCaculatorLabel().NEWTakeProfit} data={`$67.16 (6.72%)`} />
+                        <Common label={tradeCaculatorLabel().NEWTakeProfitShort} data={`${data._getTradeOrderComputationData.shortNEWProfitPipsMoved.toFixed(5)}`} />
+                        <Common label={tradeCaculatorLabel().NEWTakeProfit} data={`$${data._getTradeOrderComputationData.shortNEWProfit.toFixed(2)} (${(data._getTradeOrderComputationData.shortNEWProfitPercentage * 100).toFixed(2)}%)`} />
                     </TableTbodyTemplate>
 
                     <br />
                     <TableTbodyTemplate>
-                        <Common label={tradeCaculatorLabel().totalPotentialLoss} data={`$11.55`} />
-                        <Common label={tradeCaculatorLabel().totalPotentialProfit} data={`$67.52`} />
+                        <Common label={tradeCaculatorLabel().totalPotentialLoss} data={`$${data._getTradeOrderComputationData.shortTotalPotentialLoss.toFixed(2)}`} />
+                        <Common label={tradeCaculatorLabel().totalPotentialProfit} data={`$${data._getTradeOrderComputationData.shortTotalPotentialProfit.toFixed(2)}`}  />
                     </TableTbodyTemplate>
                 </div>
             ) : ''}

@@ -182,8 +182,8 @@ const TradingCalculator = ({
     };
 
     console.log("updateData", updateData);
-    console.log("responseTradeCaculatorDefaultData", responseTradeCaculatorDefaultData);
-    console.log("--------------------------------------------------");
+    // console.log("responseTradeCaculatorDefaultData", responseTradeCaculatorDefaultData);
+    // console.log("--------------------------------------------------");
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

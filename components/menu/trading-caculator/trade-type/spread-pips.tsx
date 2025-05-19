@@ -11,13 +11,28 @@ type SpreadPipsProps = {
     getChangeData: (e: any) => void;
 };
 
+let prevStateValue = '';
+
 const SpreadPips = ({ 
     value,
     label,
     getChangeData
 }: SpreadPipsProps) => {
+    const prevDataRef = useRef<any>('');
+    const [spreadPips, setSpreadPips] = useState<any>('');
+
+    useEffect(() => {
+        if (prevDataRef.current && prevDataRef.current !== value) {
+            setSpreadPips(value);
+        }
+
+        prevDataRef.current = value;
+        setSpreadPips(value);
+    },[value]);
+
 
     const handleChange = (e: any) => {
+        setSpreadPips(e.target.value);
         getChangeData(e.target.value);
     };
 
@@ -35,8 +50,8 @@ const SpreadPips = ({
                     type="text" 
                     id="standard-lot" 
                     className="font-bold text-right bg-yellow-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-black-900" 
-                    placeholder={value}
-                    value={value}
+                    placeholder={spreadPips}
+                    value={(spreadPips)}
                     onChange={handleChange}/>
             </td>
         </tr>

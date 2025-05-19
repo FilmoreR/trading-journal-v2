@@ -328,7 +328,7 @@ const tradeCaculatorLabel = () => {
             "title": "Profit Pips Moved",
             "titleBG": "bg-gray-100",
             "titleColor": "default",
-            "description": "(Take Profit Price - Entry Price)",
+            "description": "(Entry Price - Take Profit Price)",
             "descriptionColor": "text-purple-600",
             "valueBG": "bg-yellow-50",
             "valueColor": "text-sky-800"
@@ -337,7 +337,7 @@ const tradeCaculatorLabel = () => {
             "title": "Profit Pips Moved",
             "titleBG": "bg-gray-100",
             "titleColor": "default",
-            "description": "(Entry Price - Take Profit Price)",
+            "description": "(Take Profit Price - Entry Price)",
             "descriptionColor": "text-purple-600",
             "valueBG": "bg-yellow-50",
             "valueColor": "text-sky-800"
@@ -406,7 +406,7 @@ const tradeCaculatorLabel = () => {
             "valueColor": "text-red-600"
         },
         "NEWTotalPotentialLossUSDJPY": {
-            "title": "NEW Total Potential Losss",
+            "title": "NEW Total Potential Loss",
             "titleBG": "bg-red-100",
             "titleColor": "text-red-600",
             "description": "(NEW SL Maximum Loss + Spread Cost)",
@@ -423,11 +423,20 @@ const tradeCaculatorLabel = () => {
             "valueBG": "bg-yellow-50",
             "valueColor": "text-sky-800"
         },
-        "NEWTakeProfitPriceUSDJPY": {
+        "NEWTakeProfitPriceUSDJPYBuy": {
             "title": "NEW Take Profit Price",
             "titleBG": "bg-blue-100",
             "titleColor": "text-emerald-700",
             "description": "(Entry Price + (NEW Take Profit (pips) * Pips Conversion))",
+            "descriptionColor": "text-purple-600",
+            "valueBG": "bg-blue-900",
+            "valueColor": "text-white"
+        },
+        "NEWTakeProfitPriceUSDJPYShort": {
+            "title": "NEW Take Profit Price",
+            "titleBG": "bg-blue-100",
+            "titleColor": "text-emerald-700",
+            "description": "(Entry Price - (NEW Take Profit (pips) * Pips Conversion))",
             "descriptionColor": "text-purple-600",
             "valueBG": "bg-blue-900",
             "valueColor": "text-white"

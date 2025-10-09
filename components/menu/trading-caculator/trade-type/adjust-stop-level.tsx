@@ -16,12 +16,17 @@ const AdjustStopLevel = ({
     label,
     getChangeData
 }: AdjustStopLevelProps) => {
-
+    const prevDataRef = useRef<any>('');
     const [adjustStopLevel, setAdjustStopLevel] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
+        if (prevDataRef.current && prevDataRef.current !== value) {
+            setAdjustStopLevel(value);
+        }
+
+        prevDataRef.current = value;
         setAdjustStopLevel(value);
-    },[]);
+    },[value]);
 
     const handleChange = (e: any) => {
         setAdjustStopLevel(e.target.value);

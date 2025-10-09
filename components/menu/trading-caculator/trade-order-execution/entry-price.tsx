@@ -20,7 +20,7 @@ const EntryPrice = ({
     const [entryPrice, setEntryPrice] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-        setEntryPrice(data._getTradeOrderComputationData.entryPrice);
+        setEntryPrice(data);
     },[]);
 
     const handleChange = (e: any) => {

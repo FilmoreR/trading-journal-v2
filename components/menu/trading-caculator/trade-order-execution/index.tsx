@@ -87,9 +87,9 @@ const TradeOrderExecution = ({
             </TableTbodyTemplate>
             <br />
             <TableTbodyTemplate>
-                <EntryPrice label={tradeCaculatorLabel().entryPrice} data={data} getChangeData={onChangeEntryPrice} />
+                <EntryPrice label={tradeCaculatorLabel().entryPrice} data={data._getTradeOrderComputationData.entryPrice} getChangeData={onChangeEntryPrice} />
 
-                <StopLossLevel label={tradeCaculatorLabel().stopLossLevel} data={data} getChangeData={onChangeStopLossLevel} />
+                <StopLossLevel label={tradeCaculatorLabel().stopLossLevel} data={data._getTradeOrderComputationData.stopLossLevelPercentage} getChangeData={onChangeStopLossLevel} />
             </TableTbodyTemplate>
         </div>
     );

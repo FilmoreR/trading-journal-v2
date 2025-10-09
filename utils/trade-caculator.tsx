@@ -1,7 +1,13 @@
 const getTradeOrderComputationData = (
     responseTradeCaculatorDefaultData : any, 
-    responseCurrencyPairs : any
+    responseCurrencyPairs : any,
+    STOPLOSSLEVELPERCENTAGE : any,
+    BUYADJUSTSTOPLOSSLEVELPERCENTAGE : any,
+    SHORTADJUSTSTOPLOSSLEVELPERCENTAGE : any,
+    BUYSPREADPIPS : any,
+    SHORTSPREADPIPS : any
 ) => {
+    
     let _setStandardLot = responseTradeCaculatorDefaultData.accountType.value;
     let _setCapital = responseTradeCaculatorDefaultData.capital;
     let _setCurrencyPair = responseTradeCaculatorDefaultData.currencyPair;
@@ -41,11 +47,11 @@ const getTradeOrderComputationData = (
     responseCurrencyPairs.forEach(function(data : any){
         if(data.curreny === responseTradeCaculatorDefaultData.currencyPair) {
             _setPipsConversion = data.pipsConversion;
-            _setStopLossLevelPercentage = data.stopLosslevel;
-            _setBuyAdjustStopLosslevelPercentage = data.adjustStopLosslevel;
-            _setShortAdjustStopLosslevelPercentage = data.adjustStopLosslevel;
-            _setBuySpreadPips = data.averageSpread;
-            _setShortSpreadPips = data.averageSpread;
+            _setStopLossLevelPercentage = (STOPLOSSLEVELPERCENTAGE ? STOPLOSSLEVELPERCENTAGE : data.stopLosslevel);
+            _setBuyAdjustStopLosslevelPercentage = (BUYADJUSTSTOPLOSSLEVELPERCENTAGE ? BUYADJUSTSTOPLOSSLEVELPERCENTAGE : data.adjustStopLosslevel);
+            _setShortAdjustStopLosslevelPercentage = (SHORTADJUSTSTOPLOSSLEVELPERCENTAGE ? SHORTADJUSTSTOPLOSSLEVELPERCENTAGE : data.adjustStopLosslevel);
+            _setBuySpreadPips = (BUYSPREADPIPS ? BUYSPREADPIPS : data.averageSpread);
+            _setShortSpreadPips = (SHORTSPREADPIPS ? SHORTSPREADPIPS : data.averageSpread);
         }
     });
 

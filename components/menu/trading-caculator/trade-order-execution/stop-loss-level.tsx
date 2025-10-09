@@ -16,12 +16,17 @@ const StopLossLevel = ({
     label,
     getChangeData
 }: StopLossLevelProps) => {
-
+    const prevDataRef = useRef<any>('');
     const [stopLossLevel, seStopLossLevel] = useState<any>('');
     // Effect hook for any future initialization needs
     useEffect(() => {
-        seStopLossLevel(data._getTradeOrderComputationData.stopLossLevelPercentage);
-    },[]);
+        if (prevDataRef.current && prevDataRef.current !== data) {
+            seStopLossLevel(data);
+        }
+
+        prevDataRef.current = data;
+        seStopLossLevel(data);
+    },[data]);
 
     const handleChange = (e: any) => {
         seStopLossLevel(e.target.value);

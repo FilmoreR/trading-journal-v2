@@ -49,7 +49,7 @@ const TradingCalculator = ({
     const [riskAmount, setRiskAmount] = useState<any>('');
 
     const [entryPrice, setEntryPrice] = useState<any>(''); // onChange
-    const [stopLossLevelPercentage, setStopLossLevelPercentage] = useState<any>(''); // onChange
+    const [stopLossLevelPercentage, setStopLossLevelPercentage] = useState<any>(false); // onChange
 
     const [buyStopLossPrice, setBuyStopLossPrice] = useState<any>('');
     const [buyStopLossPips, setBuyStopLossPips] = useState<any>('');
@@ -61,8 +61,6 @@ const TradingCalculator = ({
     const [buySLMaximumLossPercentage, setBuySLMaximumLossPercentage] = useState<any>('');
     const [buyTPMaximumProfit, setBuyTPMaximumProfit] = useState<any>('');
     const [buyTPMaximumProfitPerentage, setBuyTPMaximumProfitPercentage] = useState<any>('');
-
-    const [buySpreadPips, setBuySpreadPips] = useState<any>(''); // onChange
 
     const [buySpreadCost, setBuySpreadCost] = useState<any>('');
     const [buyTotalPotentialLoss, setBuyTotalPotentialLoss] = useState<any>('');
@@ -78,10 +76,14 @@ const TradingCalculator = ({
     const [shortTPMaximumProfit, setShortTPMaximumProfit] = useState<any>('');
     const [shortTPMaximumProfitPercentage, setShortTPMaximumProfitPercentage] = useState<any>('');
 
-    const [shortSpreadPips, setShortSpreadPips] = useState<any>(''); // onChange
-
     const [shortSpreadCost, setShortSpreadCost] = useState<any>('');
     const [shortTotalPotentialLoss, setShortTotalPotentialLoss] = useState<any>('');
+
+    const [buySpreadPips, setBuySpreadPips] = useState<any>(''); // onChange
+    const [shortSpreadPips, setShortSpreadPips] = useState<any>(''); // onChange
+
+    const [buyAdjustStopLosslevelPercentage, setBuyAdjustStopLosslevelPercentage] = useState<any>(false);
+    const [shortAdjustStopLosslevelPercentage, setShortAdjustStopLosslevelPercentage] = useState<any>(false);
 
     // Effect hook for any future initialization needs
     useEffect(() => {
@@ -100,15 +102,34 @@ const TradingCalculator = ({
     useEffect(() => {
         if (responseLeverage && responseCurrencyPairs
         ) {
-            onLoadComputeData(data.firebaseData.tradeCaculatorDefaultData);
+            onLoadComputeData(
+                data.firebaseData.tradeCaculatorDefaultData,
+                false,
+                false,
+                false,
+                false,
+                false
+            );
         }
     }, [responseLeverage, responseCurrencyPairs]);
 
 
-    const onLoadComputeData = (updatedObj : any) => {
+    const onLoadComputeData = (
+        updatedObj : any,
+        STOPLOSSLEVELPERCENTAGE : any,
+        BUYADJUSTSTOPLOSSLEVELPERCENTAGE : any,
+        SHORTADJUSTSTOPLOSSLEVELPERCENTAGE : any,
+        BUYSPREADPIPS : any,
+        SHORTSPREADPIPS : any
+    ) => {
         const _getTradeOrderComputationData = getTradeOrderComputationData(
             updatedObj,
-            responseCurrencyPairs
+            responseCurrencyPairs,
+            STOPLOSSLEVELPERCENTAGE,
+            BUYADJUSTSTOPLOSSLEVELPERCENTAGE,
+            SHORTADJUSTSTOPLOSSLEVELPERCENTAGE,
+            BUYSPREADPIPS,
+            SHORTSPREADPIPS
         );
         
         setupdateData({
@@ -127,14 +148,12 @@ const TradingCalculator = ({
     };
 
     const handleChangeCurrencyPair = (value: any) => {
-        // let _responseTradeCaculatorDefaultData = responseTradeCaculatorDefaultData;
-        // console.log("handleChangeCurrencyPair  ------> _responseTradeCaculatorDefaultData :", _responseTradeCaculatorDefaultData);
         console.log("handleChangeCurrencyPair  ------> value :", value);
 
         const updatedObj = {...responseTradeCaculatorDefaultData, currencyPair: value};
 
         setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, currencyPair: value}));
-        onLoadComputeData(updatedObj);
+        onLoadComputeData(updatedObj, false, false, false, false, false);
 
         console.log("=======================================================");
     };
@@ -157,32 +176,61 @@ const TradingCalculator = ({
 
     const handleChangeEntryPrice = (value: any) => {
         console.log("handleChangeEntryPrice value ------>", value);
+
+        const updatedObj = {...responseTradeCaculatorDefaultData, entryPrice: Number(value)};
+
+        setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, entryPrice: Number(value)}));
+        onLoadComputeData(updatedObj, false, false, false, false, false);
+
+        console.log("=======================================================");
     };
 
     const handleChangeStopLossLevel = (value: any) => {
         console.log("handleChangeStopLossLevel value ------>", value);
+
+        const updatedObj = {...responseTradeCaculatorDefaultData, stopLossLevel: Number(value)};
+
+        setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, stopLossLevel: Number(value)}));
+        onLoadComputeData(updatedObj, Number(value), false, false, false, false);
     };
 
     const handleChangeSpreadPipsBuy= (value: any) => {
         console.log("handleChangeSpreadPipsBuy value ------>", value);
         console.log("handleChangeSpreadPipsShort responseTradeCaculatorDefaultData ------>", responseTradeCaculatorDefaultData);
+
+        setBuySpreadPips(Number(value));
+        onLoadComputeData(responseTradeCaculatorDefaultData, false, buyAdjustStopLosslevelPercentage, shortAdjustStopLosslevelPercentage, Number(value), shortSpreadPips);
     };
 
     const handleChangeSpreadPipsShort= (value: any) => {
         console.log("handleChangeSpreadPipsShort value ------>", value);
         console.log("handleChangeSpreadPipsShort responseTradeCaculatorDefaultData ------>", responseTradeCaculatorDefaultData);
+
+        setShortSpreadPips(Number(value));
+        onLoadComputeData(responseTradeCaculatorDefaultData, false, buyAdjustStopLosslevelPercentage, shortAdjustStopLosslevelPercentage, buySpreadPips, Number(value));
     };
 
     const handleChangeAdjustStopLevelBuy= (value: any) => {
         console.log("handleChangeAdjustStopLevelBuy value ------>", value);
+
+        // const updatedObj = {...responseTradeCaculatorDefaultData, stopLossLevel: Number(value)};
+
+        // setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, stopLossLevel: Number(value)}));
+        setBuyAdjustStopLosslevelPercentage(Number(value));
+        onLoadComputeData(responseTradeCaculatorDefaultData, false, Number(value), shortAdjustStopLosslevelPercentage, buySpreadPips, shortSpreadPips);
     };
 
     const handleChangeAdjustStopLevelShort= (value: any) => {
         console.log("handleChangeAdjustStopLevelShort value ------>", value);
+        // const updatedObj = {...responseTradeCaculatorDefaultData, stopLossLevel: Number(value)};
+
+        // setResponseTradeCaculatorDefaultData((prevState: any) => ({...prevState, stopLossLevel: Number(value)}));
+        setShortAdjustStopLosslevelPercentage(Number(value));
+        onLoadComputeData(responseTradeCaculatorDefaultData, false, buyAdjustStopLosslevelPercentage, Number(value), buySpreadPips, shortSpreadPips);
     };
 
     console.log("updateData", updateData);
-    // console.log("responseTradeCaculatorDefaultData", responseTradeCaculatorDefaultData);
+    console.log("responseTradeCaculatorDefaultData", responseTradeCaculatorDefaultData);
     // console.log("--------------------------------------------------");
 
     return (
